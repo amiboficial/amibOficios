@@ -3,14 +3,14 @@ package mx.amib.sistemas.external.oficios.revocacion;
 import java.util.Date;
 
 public class RevocadoTO {
-	Long id;
+	private Long id;
 	
-	Long idRevocacion;
-	Long idApoderado;
+	private Long idRevocacion;
+	private Long idApoderado;
 	
-	String motivo;
-	Date fechaBaja;
+	private String motivo;
+	private Date fechaBaja;
 	
-	Date fechaCreacion;
-	Date fechaModificacion;
+	private Date fechaCreacion;
+	private Date fechaModificacion;
 }

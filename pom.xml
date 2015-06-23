@@ -27,6 +27,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-orm</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
 		
 		<dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -43,6 +48,27 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.5.4</version>
         </dependency>	
+		
+		<dependency>
+			<groupId>org.hibernate.java-persistence</groupId>
+			<artifactId>jpa-api</artifactId>
+			<version>2.0-cr-1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.microsoft.sqlserver</groupId>
+		    <artifactId>sqljdbc4</artifactId>
+		    <version>4.0</version>
+		    <scope>system</scope>
+		    <systemPath>${basedir}/lib/sqljdbc4.jar</systemPath>
+		    <optional>true</optional>
+		</dependency>
 		
 	</dependencies>
 

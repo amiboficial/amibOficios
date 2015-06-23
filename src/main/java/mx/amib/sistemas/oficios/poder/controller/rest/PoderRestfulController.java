@@ -3,6 +3,7 @@ package mx.amib.sistemas.oficios.poder.controller.rest;
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
 import mx.amib.sistemas.external.oficios.poder.PoderSearchResultTO;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,9 +32,7 @@ public class PoderRestfulController {
 	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)
 	public PoderTO show(@PathVariable("id") Long id){
-		PoderTO p = new PoderTO();
-		p.setId(id);
-		return p;
+		return null;
 	}
 	
 	@RequestMapping(value="/show/vigente/{idSustentante}", method = RequestMethod.GET)
@@ -54,5 +53,6 @@ public class PoderRestfulController {
 		//TODO: Actualizar poder y sus respectivos apoderados
 		return null;
 	}
+
 	
 }

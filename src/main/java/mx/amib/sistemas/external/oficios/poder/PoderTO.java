@@ -1,8 +1,9 @@
-package mx.amib.sistemas.oficios.poder.model;
+package mx.amib.sistemas.external.oficios.poder;
 
 import java.util.Date;
+import java.util.List;
 
-public class Poder {
+public class PoderTO {
 	private Long id;
 	private Long version;
 	
@@ -14,6 +15,9 @@ public class Poder {
 	private String representanteLegalApellido1;
 	private String representanteLegalApellido2;
 	private Date fechaApoderamiento;
+	private String uuidDocumentoRespaldo;
+	
+	private List<ApoderadoTO> apoderados;
 	
 	private Date fechaCreacion;
 	private Date fechaModificacion;
@@ -78,7 +82,18 @@ public class Poder {
 	public void setFechaApoderamiento(Date fechaApoderamiento) {
 		this.fechaApoderamiento = fechaApoderamiento;
 	}
-	
+	public String getUuidDocumentoRespaldo() {
+		return uuidDocumentoRespaldo;
+	}
+	public void setUuidDocumentoRespaldo(String uuidDocumentoRespaldo) {
+		this.uuidDocumentoRespaldo = uuidDocumentoRespaldo;
+	}
+	public List<ApoderadoTO> getApoderados() {
+		return apoderados;
+	}
+	public void setApoderados(List<ApoderadoTO> apoderados) {
+		this.apoderados = apoderados;
+	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}

@@ -10,7 +10,7 @@
 	<properties>
 		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
-	
+		
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -53,8 +53,11 @@
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
     </repositories>
-	
     <pluginRepositories>
+    	<pluginRepository>
+            <id>org.eclipse.jetty</id>
+            <url>http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/</url>
+        </pluginRepository>
         <pluginRepository>
             <id>spring-releases</id>
             <url>https://repo.spring.io/libs-release</url>
@@ -67,7 +70,12 @@
             	<plugin>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-maven-plugin</artifactId>
-					<version>9.3.1-SNAPSHOT</version>
+					<version>9.2.9.v20150224</version>
+					<configuration>
+						<httpConnector>
+							<port>8085</port>
+						</httpConnector>
+					</configuration>
 				</plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

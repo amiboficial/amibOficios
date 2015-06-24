@@ -17,8 +17,6 @@ import javax.persistence.Table;
 @Table(name="t101_t_poder")
 public class Poder implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -44,6 +42,7 @@ public class Poder implements Serializable {
 	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
+	//TODO: Mapeo one-to-many bidireccional
 	@OneToMany
 	@JoinColumn(name="id_101_poder", referencedColumnName="id")
 	private List<Apoderado> apoderados;
@@ -137,4 +136,6 @@ public class Poder implements Serializable {
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
+	
+	private static final long serialVersionUID = 1L;
 }

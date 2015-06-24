@@ -1,31 +1,47 @@
-package mx.amib.sistemas.external.oficios.revocacion;
+package mx.amib.sistemas.oficios.revocacion.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-public class RevocacionTO {
-	
+@Entity
+@Table(name="t103_t_revocacion")
+public class Revocacion implements Serializable {
+
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column(name="version")
 	private Long version;
 	
+	@Column(name="id_f_grupofinanciero")
 	private Long idGrupoFinanciero;
+	@Column(name="id_f_institucion")
 	private Long idInstitucion;
+	@Column(name="id_f_notario")
 	private Long idNotario;
+	@Column(name="nu_escritura")
 	private Integer numeroEscritura;
+	@Column(name="nb_nombrereplegal")
 	private String representanteLegalNombre;
+	@Column(name="nb_apellido1replegal")
 	private String representanteLegalApellido1;
+	@Column(name="nb_apellido2replegal")
 	private String representanteLegalApellido2;
+	@Column(name="fh_revocacion")
 	private Date fechaApoderamiento;
+	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
-	private List<RevocadoTO> revocados;
+	//TODO: Mapeo bidireccional
+	private List<Revocado> revocados;
 	
+	@Column(name="fh_creacion")
 	private Date fechaCreacion;
+	@Column(name="fh_modificacion")
 	private Date fechaModificacion;
 	
 	public Long getId() {
@@ -95,10 +111,10 @@ public class RevocacionTO {
 	public void setUuidDocumentoRespaldo(String uuidDocumentoRespaldo) {
 		this.uuidDocumentoRespaldo = uuidDocumentoRespaldo;
 	}
-	public List<RevocadoTO> getRevocados() {
+	public List<Revocado> getRevocados() {
 		return revocados;
 	}
-	public void setRevocados(List<RevocadoTO> revocados) {
+	public void setRevocados(List<Revocado> revocados) {
 		this.revocados = revocados;
 	}
 	public Date getFechaCreacion() {
@@ -115,4 +131,8 @@ public class RevocacionTO {
 	}
 	
 	
+	private static final long serialVersionUID = 9182514063608328911L;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

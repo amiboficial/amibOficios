@@ -1,9 +1,12 @@
-package mx.amib.sistemas.oficios.poder.model.service;
+package mx.amib.sistemas.oficios.poder.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import mx.amib.sistemas.external.oficios.poder.ApoderadoTO;
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
@@ -11,15 +14,23 @@ import mx.amib.sistemas.oficios.poder.model.Apoderado;
 import mx.amib.sistemas.oficios.poder.model.Poder;
 import mx.amib.sistemas.oficios.poder.dao.PoderDAO;
 
+@Service
+@Scope("singleton")
 public class PoderServiceImpl {
 	
 	@Autowired
 	private PoderDAO poderDAO;
 
+	public PoderServiceImpl(){
+		super();
+		//ConvertUtils.register(null, null); <- Registrar aqui el convertidor convert,convertTO
+	}
+	
 	public PoderTO get(Long id){
 		Poder _p = poderDAO.get(id);
 		PoderTO p = new PoderTO();
 		
+		//TODO: implementar el beanUtil copy
 		p.setId(_p.getId());
 		p.setVersion(_p.getVersion());
 		

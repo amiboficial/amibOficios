@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value = "poderDAO")
 public class PoderJPADAO implements PoderDAO {
+	
 	private EntityManager em = null;
 	@PersistenceContext
     public void setEntityManager(EntityManager em) {

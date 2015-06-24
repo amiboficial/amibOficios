@@ -1,18 +1,13 @@
-package mx.amib.sistemas.oficios.poder.model;
+package mx.amib.sistemas.oficios.oficioCnbv.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="t102_t_apoderado")
-public class Apoderado implements Serializable {
+@Table(name="t106_t_autorizadocnbv")
+public class AutorizadoCnbv implements Serializable {
 	
 	@Id
 	@Column(name="id")
@@ -21,13 +16,13 @@ public class Apoderado implements Serializable {
 	
 	@Column(name="id_f_certificacion")
 	Long idCertificacion;
-	@Column(name="id_101_poder")
-	Long idPoder;
-
+	@Column(name="id_110_oficiocnbv")
+	Long idOficioCnbv;
+	
 	@Column(name="fh_creacion")
-	Date fechaCreacion;
+	private Date fechaCreacion;
 	@Column(name="fh_modificacion")
-	Date fechaModificacion;
+	private Date fechaModificacion;
 	
 	
 	public Long getId() {
@@ -42,11 +37,11 @@ public class Apoderado implements Serializable {
 	public void setIdCertificacion(Long idCertificacion) {
 		this.idCertificacion = idCertificacion;
 	}
-	public Long getIdPoder() {
-		return idPoder;
+	public Long getIdOficioCnbv() {
+		return idOficioCnbv;
 	}
-	public void setIdPoder(Long idPoder) {
-		this.idPoder = idPoder;
+	public void setIdOficioCnbv(Long idOficioCnbv) {
+		this.idOficioCnbv = idOficioCnbv;
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;
@@ -61,7 +56,5 @@ public class Apoderado implements Serializable {
 		this.fechaModificacion = fechaModificacion;
 	}
 	
-	
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 5769443743852651954L;
 }

@@ -1,20 +1,38 @@
-package mx.amib.sistemas.external.oficios.oficioCnbv;
+package mx.amib.sistemas.oficios.oficioCnbv.model;
 
+import java.io.Serializable;
+import java.lang.Long;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
 
-public class OficioCnbvTO {
-	
+/**
+ * Entity implementation class for Entity: OficioCnbv
+ *
+ */
+@Entity
+@Table(name="t105_t_oficiocnbv")
+public class OficioCnbv implements Serializable {
+
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="tx_dga")
 	private String claveDga;
+	@Column(name="fh_inicio")
 	private Date fechaInicioVigencia;
+	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
-	private List<AutorizadoCnbvTO> autorizados;
+	//TODO: Mapeo one-to-many bidereccional
+	private List<AutorizadoCnbv> autorizados;
 	
+	@Column(name="fh_creacion")
 	private Date fechaCreacion;
+	@Column(name="fh_modificacion")
 	private Date fechaModificacion;
 	
 	
@@ -43,10 +61,10 @@ public class OficioCnbvTO {
 	public void setUuidDocumentoRespaldo(String uuidDocumentoRespaldo) {
 		this.uuidDocumentoRespaldo = uuidDocumentoRespaldo;
 	}
-	public List<AutorizadoCnbvTO> getAutorizados() {
+	public List<AutorizadoCnbv> getAutorizados() {
 		return autorizados;
 	}
-	public void setAutorizados(List<AutorizadoCnbvTO> autorizados) {
+	public void setAutorizados(List<AutorizadoCnbv> autorizados) {
 		this.autorizados = autorizados;
 	}
 	public Date getFechaCreacion() {
@@ -62,4 +80,5 @@ public class OficioCnbvTO {
 		this.fechaModificacion = fechaModificacion;
 	}
 	
+	private static final long serialVersionUID = 147857L;
 }

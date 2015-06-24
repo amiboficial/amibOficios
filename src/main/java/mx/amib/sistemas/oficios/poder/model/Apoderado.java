@@ -3,12 +3,7 @@ package mx.amib.sistemas.oficios.poder.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="t102_t_apoderado")
@@ -21,8 +16,9 @@ public class Apoderado implements Serializable {
 	
 	@Column(name="id_f_certificacion")
 	Long idCertificacion;
-	@Column(name="id_101_poder")
-	Long idPoder;
+	@ManyToOne
+	@JoinColumn(name="id_101_poder")
+	Poder poder;
 
 	@Column(name="fh_creacion")
 	Date fechaCreacion;
@@ -42,11 +38,11 @@ public class Apoderado implements Serializable {
 	public void setIdCertificacion(Long idCertificacion) {
 		this.idCertificacion = idCertificacion;
 	}
-	public Long getIdPoder() {
-		return idPoder;
+	public Poder getPoder() {
+		return poder;
 	}
-	public void setIdPoder(Long idPoder) {
-		this.idPoder = idPoder;
+	public void setPoder(Poder poder) {
+		this.poder = poder;
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;

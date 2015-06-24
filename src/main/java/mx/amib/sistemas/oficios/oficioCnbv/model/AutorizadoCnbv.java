@@ -16,8 +16,9 @@ public class AutorizadoCnbv implements Serializable {
 	
 	@Column(name="id_f_certificacion")
 	Long idCertificacion;
-	@Column(name="id_110_oficiocnbv")
-	Long idOficioCnbv;
+	@ManyToOne
+	@JoinColumn(name="id_110_oficiocnbv")
+	OficioCnbv oficioCnbv;
 	
 	@Column(name="fh_creacion")
 	private Date fechaCreacion;
@@ -37,11 +38,11 @@ public class AutorizadoCnbv implements Serializable {
 	public void setIdCertificacion(Long idCertificacion) {
 		this.idCertificacion = idCertificacion;
 	}
-	public Long getIdOficioCnbv() {
-		return idOficioCnbv;
+	public OficioCnbv getOficioCnbv() {
+		return oficioCnbv;
 	}
-	public void setIdOficioCnbv(Long idOficioCnbv) {
-		this.idOficioCnbv = idOficioCnbv;
+	public void setOficioCnbv(OficioCnbv oficioCnbv) {
+		this.oficioCnbv = oficioCnbv;
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;

@@ -6,17 +6,19 @@ import java.util.List;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import mx.amib.sistemas.external.oficios.poder.ApoderadoTO;
+import mx.amib.sistemas.external.oficios.poder.PoderSearchResultTO;
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
 import mx.amib.sistemas.oficios.poder.model.Apoderado;
 import mx.amib.sistemas.oficios.poder.model.Poder;
 import mx.amib.sistemas.oficios.poder.dao.PoderDAO;
 
-@Service
 @Scope("singleton")
-public class PoderServiceImpl {
+@Service("poderService")
+public class PoderServiceImpl implements PoderService {
 	
 	@Autowired
 	private PoderDAO poderDAO;
@@ -26,8 +28,42 @@ public class PoderServiceImpl {
 		//ConvertUtils.register(null, null); <- Registrar aqui el convertidor convert,convertTO
 	}
 	
+	public PoderSearchResultTO index(Integer max, Integer offset, String sort, String order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public PoderTO get(Long id){
-		Poder _p = poderDAO.get(id);
+		return this.entityToTransport(poderDAO.get(id));
+	}
+	
+	//Getters and Setters
+	public PoderDAO getPoderDAO() {
+		return poderDAO;
+	}
+	public void setPoderDAO(PoderDAO poderDAO) {
+		this.poderDAO = poderDAO;
+	}
+
+	public PoderSearchResultTO findAllBy(Integer max, Integer offset, String sort, String order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PoderTO save(PoderTO p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PoderTO update(PoderTO p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*private Poder transportToEntity(Boolean isNew){
+		return null;
+	}*/
+	private PoderTO entityToTransport(Poder _p){
 		PoderTO p = new PoderTO();
 		
 		//TODO: implementar el beanUtil copy
@@ -49,7 +85,7 @@ public class PoderServiceImpl {
 			ApoderadoTO a = new ApoderadoTO();
 			a.setId(_a.getId());
 			a.setIdCertificacion(_a.getIdCertificacion());
-			a.setIdPoder(_a.getIdPoder());
+			a.setIdPoder(_a.getPoder().getId());
 			a.setFechaCreacion(_a.getFechaCreacion());
 			a.setFechaModificacion(_a.getFechaModificacion());
 			apoderados.add(a);
@@ -58,16 +94,6 @@ public class PoderServiceImpl {
 		
 		p.setFechaCreacion(_p.getFechaCreacion());
 		p.setFechaModificacion(_p.getFechaModificacion());
-		
 		return p;
 	}
-	
-	//Getters and Setters
-	public PoderDAO getPoderDAO() {
-		return poderDAO;
-	}
-	public void setPoderDAO(PoderDAO poderDAO) {
-		this.poderDAO = poderDAO;
-	}
-
 }

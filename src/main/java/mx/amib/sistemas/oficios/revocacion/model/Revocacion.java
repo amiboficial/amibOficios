@@ -36,7 +36,7 @@ public class Revocacion implements Serializable {
 	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
-	//TODO: Mapeo bidireccional
+	@OneToMany(mappedBy="revocacion", fetch = FetchType.EAGER)
 	private List<Revocado> revocados;
 	
 	@Column(name="fh_creacion")

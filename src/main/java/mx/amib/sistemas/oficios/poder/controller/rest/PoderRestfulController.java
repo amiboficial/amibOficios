@@ -2,6 +2,7 @@ package mx.amib.sistemas.oficios.poder.controller.rest;
 
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
 import mx.amib.sistemas.external.oficios.poder.PoderSearchResultTO;
+import mx.amib.sistemas.oficios.poder.service.PoderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/poder")
 public class PoderRestfulController {
+	
+	@Autowired
+	private PoderService poderService;
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public ResponseEntity<PoderSearchResultTO> index(@RequestParam(value="max", defaultValue="10") Integer max, 
@@ -32,15 +36,7 @@ public class PoderRestfulController {
 	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)
 	public PoderTO show(@PathVariable("id") Long id){
-		return null;
-	}
-	
-	@RequestMapping(value="/show/vigente/{idSustentante}", method = RequestMethod.GET)
-	public PoderTO showVigente(@PathVariable("idSustentante") Long idSustentante){
-		//TODO: Obtiene el poder vigente del sustentante
-		PoderTO p = new PoderTO();
-		p.setId(idSustentante);
-		return p;
+		return this.poderService.get(id);
 	}
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
@@ -54,5 +50,10 @@ public class PoderRestfulController {
 		return null;
 	}
 
-	
+	public PoderService getPoderService() {
+		return poderService;
+	}
+	public void setPoderService(PoderService poderService) {
+		this.poderService = poderService;
+	}
 }

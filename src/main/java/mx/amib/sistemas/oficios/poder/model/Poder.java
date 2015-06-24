@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="t101_t_poder")
@@ -21,6 +14,7 @@ public class Poder implements Serializable {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column(name="version")
 	private Long version;
 	
 	@Column(name="id_f_grupofinanciero")
@@ -42,9 +36,7 @@ public class Poder implements Serializable {
 	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
-	//TODO: Mapeo one-to-many bidireccional
-	@OneToMany
-	@JoinColumn(name="id_101_poder", referencedColumnName="id")
+	@OneToMany(mappedBy="poder", fetch = FetchType.EAGER)
 	private List<Apoderado> apoderados;
 	
 	@Column(name="fh_creacion")

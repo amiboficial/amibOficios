@@ -28,6 +28,7 @@ public class OficioCnbv implements Serializable {
 	private String uuidDocumentoRespaldo;
 	
 	//TODO: Mapeo one-to-many bidereccional
+	@OneToMany(mappedBy="oficioCnbv", fetch = FetchType.EAGER)
 	private List<AutorizadoCnbv> autorizados;
 	
 	@Column(name="fh_creacion")

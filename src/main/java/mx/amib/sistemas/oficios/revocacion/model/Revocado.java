@@ -3,12 +3,9 @@ package mx.amib.sistemas.oficios.revocacion.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import mx.amib.sistemas.oficios.poder.model.Apoderado;
 
 @Entity
 @Table(name="t104_t_revocado")
@@ -19,10 +16,12 @@ public class Revocado implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name="id_105_revocacion")
-	private Long idRevocacion;
-	@Column(name="id_102_apoderado")
-	private Long idApoderado;
+	@ManyToOne
+	@JoinColumn(name="id_105_revocacion")
+	private Revocacion revocacion;
+	@OneToOne
+	@JoinColumn(name="id_102_apoderado")
+	private Apoderado apoderado;
 	
 	@Column(name="tx_motivo")
 	private String motivo;
@@ -41,17 +40,17 @@ public class Revocado implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getIdRevocacion() {
-		return idRevocacion;
+	public Revocacion getRevocacion() {
+		return revocacion;
 	}
-	public void setIdRevocacion(Long idRevocacion) {
-		this.idRevocacion = idRevocacion;
+	public void setRevocacion(Revocacion revocacion) {
+		this.revocacion = revocacion;
 	}
-	public Long getIdApoderado() {
-		return idApoderado;
+	public Apoderado getApoderado() {
+		return apoderado;
 	}
-	public void setIdApoderado(Long idApoderado) {
-		this.idApoderado = idApoderado;
+	public void setApoderado(Apoderado apoderado) {
+		this.apoderado = apoderado;
 	}
 	public String getMotivo() {
 		return motivo;

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PoderTO {
+
 	private Long id;
 	private Long version;
 	
@@ -21,6 +22,8 @@ public class PoderTO {
 	
 	private Date fechaCreacion;
 	private Date fechaModificacion;
+	
+	public PoderTO(){}
 	
 	public Long getId() {
 		return id;

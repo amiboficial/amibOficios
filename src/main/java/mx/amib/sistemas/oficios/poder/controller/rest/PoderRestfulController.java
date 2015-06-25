@@ -5,6 +5,7 @@ import mx.amib.sistemas.oficios.poder.service.PoderService;
 import mx.amib.sistemas.utils.SearchResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,11 @@ public class PoderRestfulController {
 	
 	@Autowired
 	private PoderService poderService;
+	
+	@RequestMapping(value="/create", method = RequestMethod.GET)
+	public ResponseEntity<PoderTO> create(){
+		return new ResponseEntity<PoderTO>(new PoderTO(), HttpStatus.OK);
+	}
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public SearchResult<PoderTO> index(@RequestParam(value="max", defaultValue="10") Integer max, 
@@ -44,15 +50,17 @@ public class PoderRestfulController {
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
 	public ResponseEntity<PoderTO> save(@RequestBody PoderTO p){
-		return null;
+		return new ResponseEntity<PoderTO>( this.poderService.save(p) , HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/update/{id}", method = RequestMethod.POST)
-	public ResponseEntity<PoderTO> update(@PathVariable("id") Long id,  @RequestBody PoderTO p){
+	public PoderTO update(@PathVariable("id") Long id,  @RequestBody PoderTO p){
 		//TODO: Actualizar poder y sus respectivos apoderados
+		
 		return null;
 	}
 
+	//Getters y setters para inyectar dependencias
 	public PoderService getPoderService() {
 		return poderService;
 	}

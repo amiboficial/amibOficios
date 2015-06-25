@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import mx.amib.sistemas.oficios.poder.model.Poder;
 import mx.amib.sistemas.utils.SearchResult;
@@ -32,6 +33,7 @@ public class PoderJPADAO implements PoderDAO {
 		return p;
 	}
 
+	@Transactional(readOnly = true)
 	public SearchResult<Poder> findAll(Integer max, Integer offset, String sort,
 			String order) {
 		SearchResult<Poder> rs = new SearchResult<Poder>();
@@ -69,6 +71,7 @@ public class PoderJPADAO implements PoderDAO {
 		return rs;
 	}
 
+	@Transactional(readOnly = true)
 	public SearchResult<Poder> findAllBy(Integer max, Integer offset, String sort, String order, 
 			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
@@ -114,7 +117,7 @@ public class PoderJPADAO implements PoderDAO {
 		
 
 		if(numeroEscritura != null && numeroEscritura != -1){
-			filters.add("n.numeroEscritura == :numeroEscritura ");
+			filters.add("n.numeroEscritura = :numeroEscritura ");
 			whereKeywordNeeded = true;
 			namedParameters.put("numeroEscritura",numeroEscritura);
 		}
@@ -137,13 +140,13 @@ public class PoderJPADAO implements PoderDAO {
 			namedParameters.put("fechaApoderamientoAl",fechaAlCalendar.getTime());
 		}
 		//idGrupoFinanciero
-		if(idGrupoFinanciero != null && idGrupoFinanciero != -1 && idGrupoFinanciero != 0){
+		if(idGrupoFinanciero != null && idGrupoFinanciero > 0){
 			filters.add("n.idGrupoFinanciero = :idGrupoFinanciero ");
 			whereKeywordNeeded = true;
 			namedParameters.put("idGrupoFinanciero",idGrupoFinanciero);
 		}
 		//idInstitucion
-		if(idInstitucion != null && idInstitucion != -1 && idInstitucion != 0){
+		if(idInstitucion != null && idInstitucion > 0){
 			filters.add("n.idInstitucion = :idInstitucion ");
 			whereKeywordNeeded = true;
 			namedParameters.put("idInstitucion",idInstitucion);
@@ -164,26 +167,33 @@ public class PoderJPADAO implements PoderDAO {
 		strQlCount = "select count(n) " + sbQl.toString();
 		sbQl.append("order by n.").append(sort).append(" ").append(order);
 		
-		System.out.println(sbQl.toString());
-		System.out.println(strQlCount);
+		System.out.println("jqpl: " + sbQl.toString());
+		System.out.println("jqpl: " + strQlCount);
 		
 		SearchResult<Poder> rs = new SearchResult<Poder>();
-		rs.setCount(
-			em.createQuery(strQlCount.toString(), Long.class).getSingleResult()
-		);
-		rs.setList(
-			em.createQuery(sbQl.toString(), Poder.class).setFirstResult(offset).setMaxResults(max).getResultList()
-		);
+		
+		TypedQuery<Long> tpqCount = em.createQuery(strQlCount.toString(), Long.class);
+		TypedQuery<Poder> tpqRl = em.createQuery(sbQl.toString(), Poder.class);
+		for( String key : namedParameters.keySet() ){
+			tpqCount.setParameter( key , namedParameters.get(key) );
+			tpqRl.setParameter( key , namedParameters.get(key) );
+		}
+		tpqRl = tpqRl.setFirstResult(offset).setMaxResults(max);
+		rs.setCount(tpqCount.getSingleResult());
+		rs.setList(tpqRl.getResultList());
 		rs.setError(false);
 
 		return rs;
 	}
 
-	public Poder save(Poder s) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = false)
+	public Poder save(Poder p) {
+		em.persist(p);
+		em.flush();
+		return p;
 	}
 
+	@Transactional(readOnly = false)
 	public Poder update(Poder s) {
 		// TODO Auto-generated method stub
 		return null;

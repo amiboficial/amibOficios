@@ -3,6 +3,7 @@ package mx.amib.sistemas.external.oficios.poder;
 import java.util.Date;
 
 public class ApoderadoTO {
+
 	Long id;
 	
 	Long idCertificacion;
@@ -10,6 +11,8 @@ public class ApoderadoTO {
 
 	Date fechaCreacion;
 	Date fechaModificacion;
+	
+	public ApoderadoTO(){}
 	
 	public Long getId() {
 		return id;

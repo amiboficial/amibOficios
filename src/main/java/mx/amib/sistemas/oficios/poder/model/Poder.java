@@ -36,7 +36,7 @@ public class Poder implements Serializable {
 	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
-	@OneToMany(mappedBy="poder", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="poder", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Apoderado> apoderados;
 	
 	@Column(name="fh_creacion")

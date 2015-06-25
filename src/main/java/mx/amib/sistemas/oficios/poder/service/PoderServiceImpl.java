@@ -1,6 +1,7 @@
 package mx.amib.sistemas.oficios.poder.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.beanutils.ConvertUtils;
@@ -28,7 +29,7 @@ public class PoderServiceImpl implements PoderService {
 		super();
 		//ConvertUtils.register(null, null); <- Registrar aqui el convertidor convert,convertTO
 	}
-	
+		
 	public SearchResult<PoderTO> index(Integer max, Integer offset, String sort, String order) {
 		SearchResult<Poder> rsp = poderDAO.findAll(max, offset, sort, order);
 		SearchResult<PoderTO> rspt = this.entityToTransport(rsp);
@@ -63,7 +64,44 @@ public class PoderServiceImpl implements PoderService {
 
 	public PoderTO save(PoderTO p) {
 		// TODO Auto-generated method stub
-		return null;
+		Poder _p = new Poder();
+		PoderTO pres = new PoderTO();
+		
+		_p.setVersion(1L);
+		_p.setIdGrupoFinanciero(p.getIdGrupoFinanciero());
+		_p.setIdInstitucion(p.getIdInstitucion());
+		_p.setIdNotario(p.getIdNotario());
+		_p.setNumeroEscritura(p.getNumeroEscritura());
+		_p.setRepresentanteLegalNombre(p.getRepresentanteLegalNombre());
+		_p.setRepresentanteLegalApellido1(p.getRepresentanteLegalApellido1());
+		_p.setRepresentanteLegalApellido2(p.getRepresentanteLegalApellido2());
+		_p.setFechaApoderamiento(p.getFechaApoderamiento());
+		_p.setUuidDocumentoRespaldo(p.getUuidDocumentoRespaldo());
+		
+		List<Apoderado> _aps = new ArrayList<Apoderado>();
+		for(ApoderadoTO a : p.getApoderados()){
+			Apoderado _a = new Apoderado();
+			_a.setId(a.getId());
+			_a.setIdCertificacion(a.getIdCertificacion());
+			_a.setPoder(_p);
+			_a.setFechaCreacion(Calendar.getInstance().getTime());
+			_a.setFechaModificacion(Calendar.getInstance().getTime());
+			_aps.add(_a);
+		}
+		_p.setApoderados(_aps);
+		_p.setFechaCreacion(Calendar.getInstance().getTime());
+		_p.setFechaModificacion(Calendar.getInstance().getTime());
+		
+		try{
+			_p = this.poderDAO.save(_p);
+			pres = p;
+			pres.setId(_p.getId());
+		}
+		catch (Exception e) {
+			pres.setId(-1L);
+		}
+		
+		return pres;
 	}
 
 	public PoderTO update(PoderTO p) {
@@ -122,4 +160,5 @@ public class PoderServiceImpl implements PoderService {
 		p.setFechaModificacion(_p.getFechaModificacion());
 		return p;
 	}
+	
 }

@@ -1,4 +1,4 @@
-package mx.amib.sistemas.oficios.poder.dao;
+package mx.amib.sistemas.oficios.revocacion.dao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,33 +12,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import mx.amib.sistemas.oficios.poder.model.Poder;
-import mx.amib.sistemas.utils.SearchResult;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository("poderDAO")
-public class PoderJPADAO implements PoderDAO {
-	
+import mx.amib.sistemas.oficios.revocacion.model.Revocacion;
+import mx.amib.sistemas.utils.SearchResult;
+
+@Repository("revocacionDAO")
+public class RevocacionJPADAO implements RevocacionDAO {
+
 	private EntityManager em = null;
 	@PersistenceContext
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }
 	
-	@Transactional(readOnly = true)
-	public Poder get(Long id) {
-		Poder p = em.createQuery("SELECT p FROM Poder p WHERE p.id=:id", Poder.class).setParameter("id", id).getSingleResult();
-		return p;
-	}
-
-	@Transactional(readOnly = true)
-	public SearchResult<Poder> findAll(Integer max, Integer offset, String sort,
-			String order) {
-		SearchResult<Poder> rs = new SearchResult<Poder>();
-		
-		List<Poder> plist = new ArrayList<Poder>();
+	public SearchResult<Revocacion> findAll(Integer max, Integer offset,
+			String sort, String order) {
+		SearchResult<Revocacion> rs = new SearchResult<Revocacion>();
+		List<Revocacion> rlist = new ArrayList<Revocacion>();
 		
 		//Se checan los parametros de "control"
 		if(max == null || max <= 0){
@@ -50,7 +42,7 @@ public class PoderJPADAO implements PoderDAO {
 		if(sort == null || sort == ""){
 			sort = "id";
 		}
-		else if(Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
+		else if(Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order == ""){
@@ -60,21 +52,21 @@ public class PoderJPADAO implements PoderDAO {
 			order = "asc";
 		}
 		
-		plist = em.createQuery("SELECT p FROM Poder p ORDER BY " + sort + " " + order, Poder.class)
+		rlist = em.createQuery("SELECT r FROM Revocacion r ORDER BY " + sort + " " + order, Revocacion.class)
 				.setFirstResult(offset).setMaxResults(max).getResultList();
-		rs.setList(plist);
+		rs.setList(rlist);
 		rs.setCount(
-			em.createQuery("SELECT count(p) FROM Poder p", Long.class).getSingleResult()
+			em.createQuery("SELECT count(r) FROM Revocacion r", Long.class).getSingleResult()
 		);
 		rs.setError(false);
 		
 		return rs;
 	}
 
-	@Transactional(readOnly = true)
-	public SearchResult<Poder> findAllBy(Integer max, Integer offset, String sort, String order, 
-			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
-			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
+	public SearchResult<Revocacion> findAllBy(Integer max, Integer offset,
+			String sort, String order, Integer numeroEscritura,
+			Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,
+			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio,
 			Long idGrupoFinanciero, Long idInstitucion) {
 		
 		Calendar fechaDelCalendar = null;
@@ -96,7 +88,7 @@ public class PoderJPADAO implements PoderDAO {
 		if(sort == null || sort == ""){
 			sort = "id";
 		}
-		else if(Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
+		else if(Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order == ""){
@@ -105,6 +97,7 @@ public class PoderJPADAO implements PoderDAO {
 		else if(order != "desc" && order != "asc"){
 			order = "asc";
 		}
+		
 		//formar fechas
 		if( (fechaDelDia != null && fechaDelMes != null && fechaDelAnio != null) && 
 			(fechaDelDia > 0 && fechaDelMes > 0 && fechaDelAnio > 0) ){
@@ -123,20 +116,20 @@ public class PoderJPADAO implements PoderDAO {
 		//rangos de fecha
 		//si ambos son nulos, se omite; si uno es nulo, el que no es nulo se toma como unico
 		if( fechaDelCalendar != null && fechaAlCalendar == null){
-			filters.add("n.fechaApoderamiento >= :fechaApoderamiento ");
+			filters.add("n.fechaRevocacion >= :fechaRevocacion ");
 			whereKeywordNeeded = true;
-			namedParameters.put("fechaApoderamiento",fechaDelCalendar.getTime());
+			namedParameters.put("fechaRevocacion",fechaDelCalendar.getTime());
 		}
 		if( fechaDelCalendar == null && fechaAlCalendar != null){
-			filters.add("n.fechaApoderamiento <= :fechaApoderamiento ");
+			filters.add("n.fechaRevocacion <= :fechaRevocacion ");
 			whereKeywordNeeded = true;
-			namedParameters.put("fechaApoderamiento",fechaAlCalendar.getTime());
+			namedParameters.put("fechaRevocacion",fechaAlCalendar.getTime());
 		}
 		if( fechaDelCalendar != null && fechaAlCalendar != null){
-			filters.add("n.fechaApoderamiento between :fechaApoderamientoDel and :fechaApoderamientoAl ");
+			filters.add("n.fechaRevocacion between :fechaRevocacionDel and :fechaRevocacionAl ");
 			whereKeywordNeeded = true;
-			namedParameters.put("fechaApoderamientoDel",fechaDelCalendar.getTime());
-			namedParameters.put("fechaApoderamientoAl",fechaAlCalendar.getTime());
+			namedParameters.put("fechaRevocacionDel",fechaDelCalendar.getTime());
+			namedParameters.put("fechaRevocacionAl",fechaAlCalendar.getTime());
 		}
 		//idGrupoFinanciero
 		if(idGrupoFinanciero != null && idGrupoFinanciero > 0){
@@ -151,7 +144,7 @@ public class PoderJPADAO implements PoderDAO {
 			namedParameters.put("idInstitucion",idInstitucion);
 		}
 		
-		sbQl.append("from Poder as n ");
+		sbQl.append("from Revocacion as n ");
 		if(whereKeywordNeeded){
 			sbQl.append(whereKeyword);
 			
@@ -166,9 +159,9 @@ public class PoderJPADAO implements PoderDAO {
 		strQlCount = "select count(n) " + sbQl.toString();
 		sbQl.append("order by n.").append(sort).append(" ").append(order);
 				
-		SearchResult<Poder> rs = new SearchResult<Poder>();
+		SearchResult<Revocacion> rs = new SearchResult<Revocacion>();
 		TypedQuery<Long> tpqCount = em.createQuery(strQlCount.toString(), Long.class);
-		TypedQuery<Poder> tpqRl = em.createQuery(sbQl.toString(), Poder.class);
+		TypedQuery<Revocacion> tpqRl = em.createQuery(sbQl.toString(), Revocacion.class);
 		for( String key : namedParameters.keySet() ){
 			tpqCount.setParameter( key , namedParameters.get(key) );
 			tpqRl.setParameter( key , namedParameters.get(key) );
@@ -177,22 +170,28 @@ public class PoderJPADAO implements PoderDAO {
 		rs.setCount(tpqCount.getSingleResult());
 		rs.setList(tpqRl.getResultList());
 		rs.setError(false);
-
+		
 		return rs;
 	}
 
-	@Transactional(readOnly = false)
-	public Poder save(Poder p) {
-		this.em.persist(p);
-		this.em.flush();
-		return p;
+	@Transactional(readOnly = true)
+	public Revocacion get(Long id) {
+		Revocacion r = this.em.find(Revocacion.class, id);
+		return r;
 	}
 
 	@Transactional(readOnly = false)
-	public Poder update(Poder p) {
-		this.em.merge(p);
+	public Revocacion save(Revocacion r) {
+		this.em.persist(r);
 		this.em.flush();
-		return p;
+		return r;
 	}
-	
+
+	@Transactional(readOnly = false)
+	public Revocacion update(Revocacion r) {
+		this.em.merge(r);
+		this.em.flush();
+		return r;
+	}
+
 }

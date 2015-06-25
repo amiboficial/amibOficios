@@ -32,11 +32,11 @@ public class Revocacion implements Serializable {
 	@Column(name="nb_apellido2replegal")
 	private String representanteLegalApellido2;
 	@Column(name="fh_revocacion")
-	private Date fechaApoderamiento;
+	private Date fechaRevocacion;
 	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
 	
-	@OneToMany(mappedBy="revocacion", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="revocacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true )
 	private List<Revocado> revocados;
 	
 	@Column(name="fh_creacion")
@@ -99,11 +99,11 @@ public class Revocacion implements Serializable {
 	public void setRepresentanteLegalApellido2(String representanteLegalApellido2) {
 		this.representanteLegalApellido2 = representanteLegalApellido2;
 	}
-	public Date getFechaApoderamiento() {
-		return fechaApoderamiento;
+	public Date getFechaRevocacion() {
+		return fechaRevocacion;
 	}
-	public void setFechaApoderamiento(Date fechaApoderamiento) {
-		this.fechaApoderamiento = fechaApoderamiento;
+	public void setFechaRevocacion(Date fechaRevocacion) {
+		this.fechaRevocacion = fechaRevocacion;
 	}
 	public String getUuidDocumentoRespaldo() {
 		return uuidDocumentoRespaldo;

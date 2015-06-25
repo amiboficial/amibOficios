@@ -10,6 +10,6 @@ public interface PoderDAO {
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
 			Long idGrupoFinanciero, Long idInstitucion);
 	public Poder get(Long id);
-	public Poder save(Poder s);
-	public Poder update(Poder s);
+	public Poder save(Poder p);
+	public Poder update(Poder p);
 }

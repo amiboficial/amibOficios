@@ -54,10 +54,10 @@ public class PoderRestfulController {
 	}
 	
 	@RequestMapping(value="/update/{id}", method = RequestMethod.POST)
-	public PoderTO update(@PathVariable("id") Long id,  @RequestBody PoderTO p){
-		//TODO: Actualizar poder y sus respectivos apoderados
-		
-		return null;
+	public ResponseEntity<PoderTO> update(@PathVariable("id") Long id,  @RequestBody PoderTO p){
+		//Actualiza poder y sus respectivos apoderados
+		p.setId(id);
+		return new ResponseEntity<PoderTO>( this.poderService.update(p) , HttpStatus.OK);
 	}
 
 	//Getters y setters para inyectar dependencias

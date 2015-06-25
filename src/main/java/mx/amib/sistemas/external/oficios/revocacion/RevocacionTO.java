@@ -20,7 +20,7 @@ public class RevocacionTO {
 	private String representanteLegalNombre;
 	private String representanteLegalApellido1;
 	private String representanteLegalApellido2;
-	private Date fechaApoderamiento;
+	private Date fechaRevocacion;
 	private String uuidDocumentoRespaldo;
 	
 	private List<RevocadoTO> revocados;
@@ -83,11 +83,11 @@ public class RevocacionTO {
 	public void setRepresentanteLegalApellido2(String representanteLegalApellido2) {
 		this.representanteLegalApellido2 = representanteLegalApellido2;
 	}
-	public Date getFechaApoderamiento() {
-		return fechaApoderamiento;
+	public Date getFechaRevocacion() {
+		return fechaRevocacion;
 	}
-	public void setFechaApoderamiento(Date fechaApoderamiento) {
-		this.fechaApoderamiento = fechaApoderamiento;
+	public void setFechaRevocacion(Date fechaRevocacion) {
+		this.fechaRevocacion = fechaRevocacion;
 	}
 	public String getUuidDocumentoRespaldo() {
 		return uuidDocumentoRespaldo;

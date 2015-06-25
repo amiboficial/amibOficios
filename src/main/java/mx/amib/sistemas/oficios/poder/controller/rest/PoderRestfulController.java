@@ -1,8 +1,8 @@
 package mx.amib.sistemas.oficios.poder.controller.rest;
 
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
-import mx.amib.sistemas.external.oficios.poder.PoderSearchResultTO;
 import mx.amib.sistemas.oficios.poder.service.PoderService;
+import mx.amib.sistemas.utils.SearchResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +21,20 @@ public class PoderRestfulController {
 	private PoderService poderService;
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
-	public ResponseEntity<PoderSearchResultTO> index(@RequestParam(value="max", defaultValue="10") Integer max, 
+	public SearchResult<PoderTO> index(@RequestParam(value="max", defaultValue="10") Integer max, 
 			@RequestParam(value="offset", defaultValue="0") Integer offset, @RequestParam(value="sort", defaultValue="id") String sort, 
 			@RequestParam(value="order", defaultValue="asc") String order){
-		return null;
+		return this.poderService.index(max, offset, sort, order);
 	}
 	
 	@RequestMapping(value="/findAllBy", method = RequestMethod.GET)
-	public ResponseEntity<PoderSearchResultTO> findAllBy(@RequestParam(value="max", defaultValue="10") Integer max, 
-			@RequestParam(value="offset", defaultValue="0") Integer offset, @RequestParam(value="sort", defaultValue="id") String sort,
-			@RequestParam(value="order", defaultValue="asc") String order){
-		return null;
+	public SearchResult<PoderTO> findAllBy(@RequestParam(value="max", defaultValue="10") Integer max, 
+			@RequestParam(value="offset", defaultValue="0") Integer offset, @RequestParam(value="sort", defaultValue="id") String sort, @RequestParam(value="order", defaultValue="asc") String order, 
+			@RequestParam(value="numeroEscritura", required=false) Integer numeroEscritura, @RequestParam(value="fechaDelDia", required=false) Integer fechaDelDia, @RequestParam(value="fechaDelMes", required=false) Integer fechaDelMes, @RequestParam(value="fechaDelAnio", required=false) Integer fechaDelAnio,  
+			@RequestParam(value="fechaAlDia", required=false) Integer fechaAlDia, @RequestParam(value="fechaAlMes", required=false) Integer fechaAlMes, @RequestParam(value="fechaAlAnio", required=false) Integer fechaAlAnio, 
+			@RequestParam(value="idGrupoFinanciero", required=false) Long idGrupoFinanciero, @RequestParam(value="idInstitucion", required=false) Long idInstitucion
+			){
+		return this.poderService.findAllBy(max, offset, sort, order, numeroEscritura, fechaDelDia, fechaDelMes, fechaDelAnio, fechaAlDia, fechaAlMes, fechaAlAnio, idGrupoFinanciero, idInstitucion);
 	}
 	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)

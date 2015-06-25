@@ -1,12 +1,14 @@
 package mx.amib.sistemas.oficios.poder.dao;
 
-import java.util.List;
-
+import mx.amib.sistemas.utils.SearchResult;
 import mx.amib.sistemas.oficios.poder.model.Poder;
 
 public interface PoderDAO {
-	public List<Poder> findAll(Integer max, Integer offset, String sort, String order);
-	public List<Poder> findAllBy(Integer max, Integer offset, String sort, String order);
+	public SearchResult<Poder> findAll(Integer max, Integer offset, String sort, String order);
+	public SearchResult<Poder> findAllBy(Integer max, Integer offset, String sort, String order, 
+			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
+			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
+			Long idGrupoFinanciero, Long idInstitucion);
 	public Poder get(Long id);
 	public Poder save(Poder s);
 	public Poder update(Poder s);

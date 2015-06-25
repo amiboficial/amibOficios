@@ -15,6 +15,7 @@ import mx.amib.sistemas.external.oficios.poder.PoderTO;
 import mx.amib.sistemas.oficios.poder.model.Apoderado;
 import mx.amib.sistemas.oficios.poder.model.Poder;
 import mx.amib.sistemas.oficios.poder.dao.PoderDAO;
+import mx.amib.sistemas.utils.SearchResult;
 
 @Scope("singleton")
 @Service("poderService")
@@ -28,9 +29,11 @@ public class PoderServiceImpl implements PoderService {
 		//ConvertUtils.register(null, null); <- Registrar aqui el convertidor convert,convertTO
 	}
 	
-	public PoderSearchResultTO index(Integer max, Integer offset, String sort, String order) {
-		// TODO Auto-generated method stub
-		return null;
+	public SearchResult<PoderTO> index(Integer max, Integer offset, String sort, String order) {
+		SearchResult<Poder> rsp = poderDAO.findAll(max, offset, sort, order);
+		SearchResult<PoderTO> rspt = this.entityToTransport(rsp);
+		
+		return rspt;
 	}
 	
 	public PoderTO get(Long id){
@@ -45,9 +48,17 @@ public class PoderServiceImpl implements PoderService {
 		this.poderDAO = poderDAO;
 	}
 
-	public PoderSearchResultTO findAllBy(Integer max, Integer offset, String sort, String order) {
-		// TODO Auto-generated method stub
-		return null;
+	public SearchResult<PoderTO> findAllBy(Integer max, Integer offset, String sort, String order, 
+			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
+			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
+			Long idGrupoFinanciero, Long idInstitucion) {
+		
+		SearchResult<Poder> rsp = poderDAO.findAllBy(max, offset, sort, order, 
+				numeroEscritura, fechaDelDia, fechaDelMes, fechaDelAnio, 
+				fechaAlDia, fechaAlMes, fechaAlAnio, idGrupoFinanciero, idInstitucion);
+		SearchResult<PoderTO> rspt = this.entityToTransport(rsp);
+		
+		return rspt;
 	}
 
 	public PoderTO save(PoderTO p) {
@@ -63,6 +74,21 @@ public class PoderServiceImpl implements PoderService {
 	/*private Poder transportToEntity(Boolean isNew){
 		return null;
 	}*/
+	
+	private SearchResult<PoderTO> entityToTransport(SearchResult<Poder> _sr){
+		SearchResult<PoderTO> sr = new SearchResult<PoderTO>();
+		sr.setList(new ArrayList<PoderTO>());
+		sr.setError(false);
+		sr.setCount(0L);
+		for(Poder _p : _sr.getList()){
+			PoderTO p = this.entityToTransport(_p);
+			sr.getList().add(p);
+		}
+		sr.setError(_sr.getError());
+		sr.setCount(_sr.getCount());
+		return sr;
+	}
+	
 	private PoderTO entityToTransport(Poder _p){
 		PoderTO p = new PoderTO();
 		

@@ -3,6 +3,8 @@ package mx.amib.sistemas.external.oficios.poder;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PoderTO {
 
 	private Long id;
@@ -20,6 +22,7 @@ public class PoderTO {
 	
 	private List<ApoderadoTO> apoderados;
 	
+	//"yyyy-MM-dd'T'HH:mm:ssZ"
 	private Date fechaCreacion;
 	private Date fechaModificacion;
 	

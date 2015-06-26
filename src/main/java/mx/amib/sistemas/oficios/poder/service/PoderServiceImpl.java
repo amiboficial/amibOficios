@@ -63,7 +63,6 @@ public class PoderServiceImpl implements PoderService {
 	}
 
 	public PoderTO save(PoderTO p) {
-		// TODO Auto-generated method stub
 		Poder _p = new Poder();
 		PoderTO pres = new PoderTO();
 		

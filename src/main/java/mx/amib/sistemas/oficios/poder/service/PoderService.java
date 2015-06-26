@@ -1,7 +1,6 @@
 package mx.amib.sistemas.oficios.poder.service;
 
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
-import mx.amib.sistemas.oficios.poder.dao.PoderDAO;
 import mx.amib.sistemas.utils.SearchResult;
 
 public interface PoderService {
@@ -13,7 +12,4 @@ public interface PoderService {
 	public PoderTO get(Long id);
 	public PoderTO save(PoderTO p);
 	public PoderTO update(PoderTO p);
-	
-	public PoderDAO getPoderDAO();
-	public void setPoderDAO(PoderDAO poderDAO);
 }

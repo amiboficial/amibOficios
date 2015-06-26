@@ -11,9 +11,6 @@ public interface RevocacionService {
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
 			Long idGrupoFinanciero, Long idInstitucion);
 	public RevocacionTO get(Long id);
-	public RevocacionTO save(RevocacionTO p);
-	public RevocacionTO update(RevocacionTO p);
-	
-	public RevocacionDAO getPoderDAO();
-	public void setPoderDAO(RevocacionDAO poderDAO);
+	public RevocacionTO save(RevocacionTO r);
+	public RevocacionTO update(RevocacionTO r);
 }

@@ -3,11 +3,6 @@ package mx.amib.sistemas.external.oficios.revocacion;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class RevocacionTO {
 	
 	private Long id;

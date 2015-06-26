@@ -18,7 +18,7 @@ import mx.amib.sistemas.oficios.revocacion.model.Revocado;
 import mx.amib.sistemas.utils.SearchResult;
 
 @Scope("singleton")
-@Service("poderService")
+@Service("revocacionService")
 public class RevocacionServiceImpl implements RevocacionService {
 
 	public SearchResult<RevocacionTO> index(Integer max, Integer offset,
@@ -65,6 +65,33 @@ public class RevocacionServiceImpl implements RevocacionService {
 	
 	//Método privados
 	
+	private Revocado setEntityWithTransportNoChilds(RevocadoTO r, Revocado _r){
+		/*_p.setIdGrupoFinanciero(p.getIdGrupoFinanciero());
+		_p.setIdInstitucion(p.getIdInstitucion());
+		_p.setIdNotario(p.getIdNotario());
+		_p.setNumeroEscritura(p.getNumeroEscritura());
+		_p.setRepresentanteLegalNombre(p.getRepresentanteLegalNombre());
+		_p.setRepresentanteLegalApellido1(p.getRepresentanteLegalApellido1());
+		_p.setRepresentanteLegalApellido2(p.getRepresentanteLegalApellido2());
+		_p.setFechaApoderamiento(p.getFechaApoderamiento());
+		_p.setUuidDocumentoRespaldo(p.getUuidDocumentoRespaldo());*/
+		return _r;
+	}
+
+	private SearchResult<RevocacionTO> entityToTransport(SearchResult<Revocacion> _sr){
+		SearchResult<RevocacionTO> sr = new SearchResult<RevocacionTO>();
+		sr.setList(new ArrayList<RevocacionTO>());
+		sr.setError(false);
+		sr.setCount(0L);
+		for(Revocacion _r : _sr.getList()){
+			RevocacionTO r = this.entityToTransport(_r);
+			sr.getList().add(r);
+		}
+		sr.setError(_sr.getError());
+		sr.setCount(_sr.getCount());
+		return sr;
+	}
+	
 	private RevocacionTO entityToTransport(Revocacion _r){
 		RevocacionTO r = new RevocacionTO();
 		
@@ -84,8 +111,16 @@ public class RevocacionServiceImpl implements RevocacionService {
 		List<RevocadoTO> revocados = new ArrayList<RevocadoTO>();
 		for(Revocado _rv : _r.getRevocados()){
 			RevocadoTO rv = new RevocadoTO();
-			//TODO: completar la lista de revocacos y asociarla a la RevocacionTO
+			rv.setId(_rv.getId());
+			rv.setIdRevocacion(_rv.getRevocacion().getId());
+			rv.setIdApoderado(_rv.getApoderado().getId());
+			rv.setMotivo(_rv.getMotivo());
+			rv.setFechaBaja(_rv.getFechaBaja());
+			rv.setFechaCreacion(_rv.getFechaCreacion());
+			rv.setFechaModificacion(_rv.getFechaModificacion());
+			revocados.add(rv);
 		}
+		r.setRevocados(revocados);
 		
 		r.setFechaCreacion(_r.getFechaCreacion());
 		r.setFechaModificacion(_r.getFechaModificacion());

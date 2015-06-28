@@ -42,7 +42,7 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		if(sort == null || sort == ""){
 			sort = "id";
 		}
-		else if(Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order == ""){

@@ -50,7 +50,7 @@ public class PoderJPADAO implements PoderDAO {
 		if(sort == null || sort == ""){
 			sort = "id";
 		}
-		else if(Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order == ""){
@@ -96,7 +96,7 @@ public class PoderJPADAO implements PoderDAO {
 		if(sort == null || sort == ""){
 			sort = "id";
 		}
-		else if(Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order == ""){

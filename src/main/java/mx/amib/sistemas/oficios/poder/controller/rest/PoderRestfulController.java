@@ -59,7 +59,18 @@ public class PoderRestfulController {
 		p.setId(id);
 		return new ResponseEntity<PoderTO>( this.poderService.update(p) , HttpStatus.OK);
 	}
-
+	
+	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Boolean> delete(@PathVariable("id") Long id){
+		Boolean b = this.poderService.delete(id);
+		if(b == true){
+			return new ResponseEntity<Boolean>( true , HttpStatus.OK );
+		}
+		else{
+			return new ResponseEntity<Boolean>( false , HttpStatus.EXPECTATION_FAILED );
+		}
+	}
+	
 	//Getters y setters para inyectar dependencias
 	public PoderService getPoderService() {
 		return poderService;

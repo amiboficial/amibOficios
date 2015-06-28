@@ -1,6 +1,5 @@
 package mx.amib.sistemas.oficios.revocacion.controller.rest;
 
-import mx.amib.sistemas.external.oficios.poder.PoderTO;
 import mx.amib.sistemas.external.oficios.revocacion.RevocacionTO;
 import mx.amib.sistemas.oficios.revocacion.service.RevocacionService;
 import mx.amib.sistemas.utils.SearchResult;
@@ -59,6 +58,17 @@ public class RevocacionRestfulController {
 		//Actualiza la revocacion y sus respectivos apoderados
 		r.setId(id);
 		return new ResponseEntity<RevocacionTO>( this.revocacionService.update(r) , HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Boolean> delete(@PathVariable("id") Long id){
+		Boolean b = this.revocacionService.delete(id);
+		if(b == true){
+			return new ResponseEntity<Boolean>( true , HttpStatus.OK );
+		}
+		else{
+			return new ResponseEntity<Boolean>( false , HttpStatus.EXPECTATION_FAILED );
+		}
 	}
 	
 	public RevocacionService getRevocacionService() {

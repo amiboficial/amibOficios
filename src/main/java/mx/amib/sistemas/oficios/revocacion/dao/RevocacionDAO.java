@@ -12,4 +12,5 @@ public interface RevocacionDAO {
 	public Revocacion get(Long id);
 	public Revocacion save(Revocacion r);
 	public Revocacion update(Revocacion r);
+	public void delete(Long id);
 }

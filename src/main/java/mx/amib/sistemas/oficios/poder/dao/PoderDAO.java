@@ -12,4 +12,5 @@ public interface PoderDAO {
 	public Poder get(Long id);
 	public Poder save(Poder p);
 	public Poder update(Poder p);
+	public void delete(Long id);
 }

@@ -194,4 +194,10 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		return r;
 	}
 
+	@Transactional(readOnly = false)
+	public void delete(Long id) {
+		this.em.remove( this.get(id) );
+		this.em.flush();
+	}
+
 }

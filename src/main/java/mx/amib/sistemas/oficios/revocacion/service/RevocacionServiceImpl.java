@@ -11,12 +11,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import mx.amib.sistemas.external.oficios.poder.ApoderadoTO;
 import mx.amib.sistemas.external.oficios.revocacion.RevocacionTO;
 import mx.amib.sistemas.external.oficios.revocacion.RevocadoTO;
 import mx.amib.sistemas.oficios.poder.dao.ApoderadoDAO;
-import mx.amib.sistemas.oficios.poder.model.Apoderado;
-import mx.amib.sistemas.oficios.poder.model.Poder;
 import mx.amib.sistemas.oficios.revocacion.dao.RevocacionDAO;
 import mx.amib.sistemas.oficios.revocacion.model.Revocacion;
 import mx.amib.sistemas.oficios.revocacion.model.Revocado;
@@ -228,6 +225,17 @@ public class RevocacionServiceImpl implements RevocacionService {
 		r.setFechaModificacion(_r.getFechaModificacion());
 		return r;
 	}
+	public Boolean delete(Long id) {
+		Boolean completed;
+		try{
+			this.revocacionDAO.delete(id);
+			completed = true;
+		}
+		catch(Exception e){
+			completed = false;
+		}
+		return completed;
+	}
 	
 	public ApoderadoDAO getApoderadoDAO() {
 		return apoderadoDAO;
@@ -241,5 +249,7 @@ public class RevocacionServiceImpl implements RevocacionService {
 	public void setRevocacionDAO(RevocacionDAO revocacionDAO) {
 		this.revocacionDAO = revocacionDAO;
 	}
+
+	
 	
 }

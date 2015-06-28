@@ -194,5 +194,11 @@ public class PoderJPADAO implements PoderDAO {
 		this.em.flush();
 		return p;
 	}
+
+	@Transactional(readOnly = false)
+	public void delete(Long id) {
+		this.em.remove( this.get(id) );
+		this.em.flush();
+	}
 	
 }

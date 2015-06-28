@@ -229,5 +229,17 @@ public class PoderServiceImpl implements PoderService {
 		p.setFechaModificacion(_p.getFechaModificacion());
 		return p;
 	}
+
+	public Boolean delete(Long id) {
+		Boolean completed;
+		try{
+			this.poderDAO.delete(id);
+			completed = true;
+		}
+		catch(Exception e){
+			completed = false;
+		}
+		return completed;
+	}
 	
 }

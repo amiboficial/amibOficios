@@ -1,7 +1,6 @@
 package mx.amib.sistemas.oficios.revocacion.service;
 
 import mx.amib.sistemas.external.oficios.revocacion.RevocacionTO;
-import mx.amib.sistemas.oficios.revocacion.dao.RevocacionDAO;
 import mx.amib.sistemas.utils.SearchResult;
 
 public interface RevocacionService {

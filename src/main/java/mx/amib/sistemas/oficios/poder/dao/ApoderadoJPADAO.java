@@ -38,7 +38,7 @@ public class ApoderadoJPADAO implements ApoderadoDAO {
 
 	@Transactional(readOnly = false)
 	public Apoderado update(Apoderado ap) {
-		// TODO Auto-generated method stub
+		em.merge(ap);
 		em.flush();
 		return ap;
 	}

@@ -3,8 +3,6 @@ package mx.amib.sistemas.external.oficios.poder;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class PoderTO {
 
 	private Long id;

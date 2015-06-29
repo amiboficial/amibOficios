@@ -19,6 +19,8 @@ public class OficioCnbv implements Serializable {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column(name="version")
+	private Long version;
 	
 	@Column(name="tx_dga")
 	private String claveDga;
@@ -41,6 +43,12 @@ public class OficioCnbv implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Long getVersion() {
+		return version;
+	}
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 	
 	public String getClaveDga() {

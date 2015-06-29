@@ -41,14 +41,6 @@ public class PoderServiceImpl implements PoderService {
 		return this.entityToTransport(poderDAO.get(id));
 	}
 	
-	//Getters and Setters
-	public PoderDAO getPoderDAO() {
-		return poderDAO;
-	}
-	public void setPoderDAO(PoderDAO poderDAO) {
-		this.poderDAO = poderDAO;
-	}
-
 	public SearchResult<PoderTO> findAllBy(Integer max, Integer offset, String sort, String order, 
 			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
@@ -169,6 +161,18 @@ public class PoderServiceImpl implements PoderService {
 		return pres;
 	}
 
+	public Boolean delete(Long id) {
+		Boolean completed;
+		try{
+			this.poderDAO.delete(id);
+			completed = true;
+		}
+		catch(Exception e){
+			completed = false;
+		}
+		return completed;
+	}
+	
 	private Poder setEntityWithTransportNoChilds(PoderTO p, Poder _p){
 		_p.setIdGrupoFinanciero(p.getIdGrupoFinanciero());
 		_p.setIdInstitucion(p.getIdInstitucion());
@@ -230,16 +234,12 @@ public class PoderServiceImpl implements PoderService {
 		return p;
 	}
 
-	public Boolean delete(Long id) {
-		Boolean completed;
-		try{
-			this.poderDAO.delete(id);
-			completed = true;
-		}
-		catch(Exception e){
-			completed = false;
-		}
-		return completed;
-	}
 	
+	//Getters and Setters
+		public PoderDAO getPoderDAO() {
+			return poderDAO;
+		}
+		public void setPoderDAO(PoderDAO poderDAO) {
+			this.poderDAO = poderDAO;
+		}
 }

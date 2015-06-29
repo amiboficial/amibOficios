@@ -88,7 +88,6 @@ public class RevocacionServiceImpl implements RevocacionService {
 
 	@Transactional
 	public RevocacionTO update(RevocacionTO r) {
-		// TODO Auto-generated method stub
 		RevocacionTO rres = new RevocacionTO();
 		
 		List<RevocadoTO> nuevosRevocadosTO = new ArrayList<RevocadoTO>();

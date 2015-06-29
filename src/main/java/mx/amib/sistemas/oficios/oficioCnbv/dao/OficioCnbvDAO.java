@@ -10,8 +10,8 @@ public interface OficioCnbvDAO {
 	public SearchResult<OficioCnbv> findAllBy(Integer max, Integer offset, String sort, String order, 
 			String claveDga, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio);
-	public SearchResult<OficioCnbv> findAllByIdCertificacionInAutorizados(Long id);
-	public SearchResult<OficioCnbv> findAllByMultipleIdCertificacionInAutorizados(Set<Long> multipleIds);
+	public SearchResult<OficioCnbv> findAllByIdCertificacionInAutorizados(Integer max, Integer offset, String sort, String order, Long id);
+	public SearchResult<OficioCnbv> findAllByMultipleIdCertificacionInAutorizados(Integer max, Integer offset, String sort, String order, Set<Long> multipleIds);
 	public OficioCnbv get(Long id);
 	public OficioCnbv save(OficioCnbv of);
 	public OficioCnbv update(OficioCnbv of);

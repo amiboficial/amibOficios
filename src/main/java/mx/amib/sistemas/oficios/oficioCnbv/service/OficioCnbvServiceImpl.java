@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import mx.amib.sistemas.external.oficios.oficioCnbv.AutorizadoCnbvTO;
 import mx.amib.sistemas.external.oficios.oficioCnbv.OficioCnbvTO;
@@ -99,6 +100,7 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 		return ores;
 	}
 
+	@Transactional
 	public OficioCnbvTO update(OficioCnbvTO o) {
 		OficioCnbvTO ores = new OficioCnbvTO();
 		
@@ -139,7 +141,7 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 			//System.out.println("VA A BORRAR: " + _ap.getId());
 			_o.getAutorizados().remove(_aut);
 		}
-		//Inserta nuevos apoderados
+		//Inserta nuevos autorizados
 		for(AutorizadoCnbvTO aut: nuevosAutorizadoCnbvTO){
 			AutorizadoCnbv _aut = new AutorizadoCnbv();
 			_aut.setId(aut.getId());
@@ -198,7 +200,7 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 		}
 		sr.setCount(_sr.getCount());
 		sr.setError(_sr.getError());
-		return null;
+		return sr;
 	}
 	
 	private OficioCnbvTO entityToTransport(OficioCnbv _o){
@@ -217,7 +219,6 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 			aut.setId(_aut.getId());
 			aut.setIdCertificacion(_aut.getIdCertificacion());
 			aut.setIdOficioCnbv(_o.getId());
-			
 			aut.setFechaCreacion(_aut.getFechaCreacion());
 			aut.setFechaModificacion(_aut.getFechaModificacion());
 			auts.add(aut);

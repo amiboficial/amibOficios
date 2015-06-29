@@ -10,6 +10,8 @@ public class AutorizadoCnbvTO {
 	
 	private Date fechaCreacion;
 	private Date fechaModificacion;
+	
+	
 	public Long getId() {
 		return id;
 	}

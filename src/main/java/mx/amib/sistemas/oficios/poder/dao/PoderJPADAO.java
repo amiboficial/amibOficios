@@ -18,8 +18,13 @@ import mx.amib.sistemas.utils.SearchResult;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Repository("poderDAO")
 public class PoderJPADAO implements PoderDAO {
+	
+	static Logger logger = LogManager.getLogger(PoderJPADAO.class.getName());
 	
 	private EntityManager em = null;
 	@PersistenceContext
@@ -36,8 +41,8 @@ public class PoderJPADAO implements PoderDAO {
 	@Transactional(readOnly = true)
 	public SearchResult<Poder> findAll(Integer max, Integer offset, String sort,
 			String order) {
-		SearchResult<Poder> rs = new SearchResult<Poder>();
 		
+		SearchResult<Poder> rs = new SearchResult<Poder>();
 		List<Poder> plist = new ArrayList<Poder>();
 		
 		//Se checan los parametros de "control"
@@ -53,18 +58,19 @@ public class PoderJPADAO implements PoderDAO {
 		else if(!Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.compareToIgnoreCase("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
+		//logger.error("EL QUERY ES: " +"SELECT p FROM Poder p ORDER BY p." + sort + " " + order);
 		
-		plist = em.createQuery("SELECT p FROM Poder p ORDER BY " + sort + " " + order, Poder.class)
+		plist = em.createQuery("SELECT p FROM Poder p ORDER BY p." + sort + " " + order, Poder.class)
 				.setFirstResult(offset).setMaxResults(max).getResultList();
 		rs.setList(plist);
 		rs.setCount(
-			em.createQuery("SELECT count(p) FROM Poder p", Long.class).getSingleResult()
+			em.createQuery("SELECT count(p) FROM Poder p ", Long.class).getSingleResult()
 		);
 		rs.setError(false);
 		
@@ -99,12 +105,13 @@ public class PoderJPADAO implements PoderDAO {
 		else if(!Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.compareToIgnoreCase("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
+		//logger.error("EL QUERY ES: " +"SELECT p FROM Poder p ORDER BY p." + sort + " " + order);
 		//formar fechas
 		if( (fechaDelDia != null && fechaDelMes != null && fechaDelAnio != null) && 
 			(fechaDelDia > 0 && fechaDelMes > 0 && fechaDelAnio > 0) ){
@@ -164,7 +171,7 @@ public class PoderJPADAO implements PoderDAO {
 			
 		}
 		strQlCount = "select count(n) " + sbQl.toString();
-		sbQl.append("order by n.").append(sort).append(" ").append(order);
+		sbQl.insert(0, "select n ").append("order by n.").append(sort).append(" ").append(order);
 				
 		SearchResult<Poder> rs = new SearchResult<Poder>();
 		TypedQuery<Long> tpqCount = em.createQuery(strQlCount.toString(), Long.class);

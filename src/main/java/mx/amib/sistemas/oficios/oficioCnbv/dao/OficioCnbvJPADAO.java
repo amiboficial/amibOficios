@@ -47,10 +47,10 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.compareToIgnoreCase("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 
@@ -91,10 +91,10 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.compareToIgnoreCase("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 		
@@ -181,10 +181,10 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.compareToIgnoreCase("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 
@@ -217,10 +217,10 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.compareToIgnoreCase("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 

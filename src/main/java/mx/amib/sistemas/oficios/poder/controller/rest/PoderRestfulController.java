@@ -50,10 +50,10 @@ public class PoderRestfulController {
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
 	public ResponseEntity<PoderTO> save(@RequestBody PoderTO p){
-		return new ResponseEntity<PoderTO>( this.poderService.save(p) , HttpStatus.OK);
+		return new ResponseEntity<PoderTO>( this.poderService.save(p) , HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value="/update/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<PoderTO> update(@PathVariable("id") Long id,  @RequestBody PoderTO p){
 		//Actualiza poder y sus respectivos apoderados
 		p.setId(id);

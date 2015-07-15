@@ -80,7 +80,7 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 		List<AutorizadoCnbv> auts = new ArrayList<AutorizadoCnbv>();
 		for(AutorizadoCnbvTO aut : o.getAutorizados()){
 			AutorizadoCnbv _aut = new AutorizadoCnbv();
-			_aut.setId(aut.getId());
+			_aut.setId(null);
 			_aut.setIdCertificacion(aut.getIdCertificacion());
 			_aut.setOficioCnbv(_o);
 			_aut.setFechaCreacion(Calendar.getInstance().getTime());

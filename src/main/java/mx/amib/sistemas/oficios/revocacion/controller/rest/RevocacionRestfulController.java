@@ -50,10 +50,10 @@ public class RevocacionRestfulController {
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
 	public ResponseEntity<RevocacionTO> save(@RequestBody RevocacionTO r){
-		return new ResponseEntity<RevocacionTO>( this.revocacionService.save(r) , HttpStatus.OK);
+		return new ResponseEntity<RevocacionTO>( this.revocacionService.save(r) , HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value="/update/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<RevocacionTO> update(@PathVariable("id") Long id,  @RequestBody RevocacionTO r){
 		//Actualiza la revocacion y sus respectivos apoderados
 		r.setId(id);

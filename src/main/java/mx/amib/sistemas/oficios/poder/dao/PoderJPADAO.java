@@ -47,16 +47,16 @@ public class PoderJPADAO implements PoderDAO {
 		if(offset == null || offset <= 0){
 			offset = 0;
 		}
-		if(sort == null || sort == ""){
+		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
 		else if(!Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.trim().compareTo("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 		
@@ -93,18 +93,19 @@ public class PoderJPADAO implements PoderDAO {
 		if(offset == null || offset <= 0){
 			offset = 0;
 		}
-		if(sort == null || sort == ""){
+		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
 		else if(!Arrays.asList( new String[]{"id","fechaApoderamiento","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.trim().compareTo("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
+		
 		//formar fechas
 		if( (fechaDelDia != null && fechaDelMes != null && fechaDelAnio != null) && 
 			(fechaDelDia > 0 && fechaDelMes > 0 && fechaDelAnio > 0) ){
@@ -165,7 +166,10 @@ public class PoderJPADAO implements PoderDAO {
 		}
 		strQlCount = "select count(n) " + sbQl.toString();
 		sbQl.append("order by n.").append(sort).append(" ").append(order);
-				
+		
+		//System.out.println(strQlCount);
+		//System.out.println(sbQl.toString());
+		
 		SearchResult<Poder> rs = new SearchResult<Poder>();
 		TypedQuery<Long> tpqCount = em.createQuery(strQlCount.toString(), Long.class);
 		TypedQuery<Poder> tpqRl = em.createQuery(sbQl.toString(), Poder.class);

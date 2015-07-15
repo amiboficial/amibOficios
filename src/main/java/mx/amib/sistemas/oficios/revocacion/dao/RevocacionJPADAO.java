@@ -39,16 +39,16 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		if(offset == null || offset <= 0){
 			offset = 0;
 		}
-		if(sort == null || sort == ""){
+		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
 		else if(!Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.trim().compareTo("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 		
@@ -85,16 +85,16 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		if(offset == null || offset <= 0){
 			offset = 0;
 		}
-		if(sort == null || sort == ""){
+		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
-		else if(Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","fechaRevocacion","numeroEscritura"} ).contains(sort)){
 			sort = "id";
 		}
-		if(order == null || order == ""){
+		if(order == null || order.trim().compareTo("") == 0){
 			order = "asc";
 		}
-		else if(order != "desc" && order != "asc"){
+		else if(order.compareToIgnoreCase("desc") != 0 && order.compareToIgnoreCase("asc") != 0){
 			order = "asc";
 		}
 		

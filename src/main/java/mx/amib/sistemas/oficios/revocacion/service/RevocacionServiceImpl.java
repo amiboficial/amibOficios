@@ -64,7 +64,7 @@ public class RevocacionServiceImpl implements RevocacionService {
 		List<Revocado> _rrs = new ArrayList<Revocado>();
 		for(RevocadoTO rr : r.getRevocados()){
 			Revocado _rr = new Revocado();
-			_rr.setId( rr.getId() );
+			_rr.setId( null );
 			_rr.setRevocacion( _r );
 			_rr.setApoderado( this.apoderadoDAO.get(rr.getIdApoderado()) );
 			_rr.setMotivo( rr.getMotivo() );
@@ -144,7 +144,6 @@ public class RevocacionServiceImpl implements RevocacionService {
 		//Actualiza los revocados que si se encuentran
 		for(RevocadoTO rr : actualizablesRevocadosTO.values()){
 			Revocado _rr = null;
-			
 			_rr = actualizablesRevocados.get(rr.getId());
 			_rr.setMotivo(rr.getMotivo());
 			_rr.setFechaBaja(rr.getFechaBaja());

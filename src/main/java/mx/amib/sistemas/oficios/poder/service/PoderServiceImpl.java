@@ -66,7 +66,7 @@ public class PoderServiceImpl implements PoderService {
 		List<Apoderado> _aps = new ArrayList<Apoderado>();
 		for(ApoderadoTO a : p.getApoderados()){
 			Apoderado _a = new Apoderado();
-			_a.setId(a.getId());
+			_a.setId(null);
 			_a.setIdCertificacion(a.getIdCertificacion());
 			_a.setPoder(_p);
 			_a.setFechaCreacion(Calendar.getInstance().getTime());
@@ -236,10 +236,10 @@ public class PoderServiceImpl implements PoderService {
 
 	
 	//Getters and Setters
-		public PoderDAO getPoderDAO() {
-			return poderDAO;
-		}
-		public void setPoderDAO(PoderDAO poderDAO) {
-			this.poderDAO = poderDAO;
-		}
+	public PoderDAO getPoderDAO() {
+		return poderDAO;
+	}
+	public void setPoderDAO(PoderDAO poderDAO) {
+		this.poderDAO = poderDAO;
+	}
 }

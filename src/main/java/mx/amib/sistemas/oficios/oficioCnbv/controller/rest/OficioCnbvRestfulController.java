@@ -72,10 +72,10 @@ public class OficioCnbvRestfulController {
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
 	public ResponseEntity<OficioCnbvTO> save(@RequestBody OficioCnbvTO o){
-		return new ResponseEntity<OficioCnbvTO>( this.oficioCnbvService.save(o) , HttpStatus.OK);
+		return new ResponseEntity<OficioCnbvTO>( this.oficioCnbvService.save(o) , HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value="/update/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<OficioCnbvTO> update(@PathVariable("id") Long id,  @RequestBody OficioCnbvTO o){
 		o.setId(id);
 		return new ResponseEntity<OficioCnbvTO>( this.oficioCnbvService.update(o) , HttpStatus.OK);

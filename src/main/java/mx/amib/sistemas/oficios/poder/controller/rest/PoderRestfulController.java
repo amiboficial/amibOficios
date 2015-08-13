@@ -71,6 +71,17 @@ public class PoderRestfulController {
 		}
 	}
 	
+	@RequestMapping(value="/isNumeroEscrituraAvailable/{numeroEscritura}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> isNumeroEscrituraAvailable(@PathVariable("numeroEscritura") Integer numeroEscritura){
+		Boolean b = this.poderService.isNumeroEscrituraAvailable(numeroEscritura);
+		if(b == true){
+			return new ResponseEntity<Boolean>( true , HttpStatus.OK );
+		}
+		else{
+			return new ResponseEntity<Boolean>( false , HttpStatus.EXPECTATION_FAILED );
+		}
+	}
+	
 	//Getters y setters para inyectar dependencias
 	public PoderService getPoderService() {
 		return poderService;

@@ -184,7 +184,8 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 
 	private OficioCnbv setEntityWithTransportNoChilds(OficioCnbvTO o, OficioCnbv _o){
 		_o.setClaveDga(o.getClaveDga());
-		_o.setFechaInicioVigencia(o.getFechaInicioVigencia());
+		_o.setNumeroOficio(o.getNumeroOficio());
+		_o.setFechaOficio(o.getFechaOficio());
 		_o.setUuidDocumentoRespaldo(o.getUuidDocumentoRespaldo());
 		return _o;
 	}
@@ -210,7 +211,10 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 		o.setVersion(_o.getVersion());
 		
 		o.setClaveDga(_o.getClaveDga());
-		o.setFechaInicioVigencia(_o.getFechaInicioVigencia());
+		
+		o.setNumeroOficio(_o.getNumeroOficio());
+		o.setFechaOficio(_o.getFechaOficio());
+
 		o.setUuidDocumentoRespaldo(_o.getUuidDocumentoRespaldo());
 		
 		List<AutorizadoCnbvTO> auts = new ArrayList<AutorizadoCnbvTO>();

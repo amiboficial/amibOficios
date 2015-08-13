@@ -172,6 +172,9 @@ public class PoderServiceImpl implements PoderService {
 		}
 		return completed;
 	}
+	public Boolean isNumeroEscrituraAvailable(Integer numeroEscritura) {
+		return this.poderDAO.isNumeroEscrituraAvailable(numeroEscritura);
+	}
 	
 	private Poder setEntityWithTransportNoChilds(PoderTO p, Poder _p){
 		_p.setIdGrupoFinanciero(p.getIdGrupoFinanciero());

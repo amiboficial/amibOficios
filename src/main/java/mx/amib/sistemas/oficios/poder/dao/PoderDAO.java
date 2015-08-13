@@ -13,4 +13,6 @@ public interface PoderDAO {
 	public Poder save(Poder p);
 	public Poder update(Poder p);
 	public void delete(Long id);
+	
+	public boolean isNumeroEscrituraAvailable(Integer numeroEscritura);
 }

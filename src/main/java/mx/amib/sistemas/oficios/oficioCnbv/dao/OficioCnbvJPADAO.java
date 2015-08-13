@@ -44,7 +44,7 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
-		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","claveDga","fechaOficio"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order.trim().compareTo("") == 0){
@@ -88,7 +88,7 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
-		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","claveDga","fechaOficio"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order.trim().compareTo("") == 0){
@@ -111,20 +111,20 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		//rangos de fecha
 		//si ambos son nulos, se omite; si uno es nulo, el que no es nulo se toma como unico
 		if( fechaDelCalendar != null && fechaAlCalendar == null){
-			filters.add("o.fechaInicioVigencia >= :fechaInicioVigencia ");
+			filters.add("o.fechaOficio >= :fechaOficio ");
 			whereKeywordNeeded = true;
-			namedParameters.put("fechaInicioVigencia",fechaDelCalendar.getTime());
+			namedParameters.put("fechaOficio",fechaDelCalendar.getTime());
 		}
 		if( fechaDelCalendar == null && fechaAlCalendar != null){
-			filters.add("o.fechaInicioVigencia <= :fechaInicioVigencia ");
+			filters.add("o.fechaOficio <= :fechaOficio ");
 			whereKeywordNeeded = true;
-			namedParameters.put("fechaInicioVigencia",fechaAlCalendar.getTime());
+			namedParameters.put("fechaOficio",fechaAlCalendar.getTime());
 		}
 		if( fechaDelCalendar != null && fechaAlCalendar != null){
-			filters.add("o.fechaInicioVigencia between :fechaInicioVigenciaDel and :fechaInicioVigenciaAl ");
+			filters.add("o.fechaOficio between :fechaOficioDel and :fechaOficioAl ");
 			whereKeywordNeeded = true;
-			namedParameters.put("fechaInicioVigenciaDel",fechaDelCalendar.getTime());
-			namedParameters.put("fechaInicioVigenciaAl",fechaAlCalendar.getTime());
+			namedParameters.put("fechaOficioDel",fechaDelCalendar.getTime());
+			namedParameters.put("fechaOficioAl",fechaAlCalendar.getTime());
 		}
 		
 		if(claveDga != null && claveDga != "" ){
@@ -178,7 +178,7 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
-		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","claveDga","fechaOficio"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order.trim().compareTo("") == 0){
@@ -214,7 +214,7 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		if(sort == null || sort.trim().compareTo("") == 0 ){
 			sort = "id";
 		}
-		else if(!Arrays.asList( new String[]{"id","claveDga","fechaInicioVigencia"} ).contains(sort)){
+		else if(!Arrays.asList( new String[]{"id","claveDga","fechaOficio"} ).contains(sort)){
 			sort = "id";
 		}
 		if(order == null || order.trim().compareTo("") == 0){

@@ -13,4 +13,6 @@ public interface PoderService {
 	public PoderTO save(PoderTO p);
 	public PoderTO update(PoderTO p);
 	public Boolean delete(Long id);
+	
+	public Boolean isNumeroEscrituraAvailable(Integer numeroEscritura);
 }

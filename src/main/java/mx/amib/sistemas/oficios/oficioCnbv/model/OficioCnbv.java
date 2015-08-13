@@ -24,11 +24,12 @@ public class OficioCnbv implements Serializable {
 	
 	@Column(name="tx_dga")
 	private String claveDga;
-	@Column(name="fh_inicio")
-	private Date fechaInicioVigencia;
+	@Column(name="nu_oficio")
+	private Integer numeroOficio;
+	@Column(name="fh_oficio")
+	private Date fechaOficio;
 	@Column(name="uuid_f_docrespaldo")
 	private String uuidDocumentoRespaldo;
-	
 	@OneToMany(mappedBy="oficioCnbv", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true )
 	private List<AutorizadoCnbv> autorizados;
 	
@@ -57,11 +58,17 @@ public class OficioCnbv implements Serializable {
 	public void setClaveDga(String claveDga) {
 		this.claveDga = claveDga;
 	}
-	public Date getFechaInicioVigencia() {
-		return fechaInicioVigencia;
+	public Integer getNumeroOficio() {
+		return numeroOficio;
 	}
-	public void setFechaInicioVigencia(Date fechaInicioVigencia) {
-		this.fechaInicioVigencia = fechaInicioVigencia;
+	public void setNumeroOficio(Integer numeroOficio) {
+		this.numeroOficio = numeroOficio;
+	}
+	public Date getFechaOficio() {
+		return fechaOficio;
+	}
+	public void setFechaOficio(Date fechaOficio) {
+		this.fechaOficio = fechaOficio;
 	}
 	public String getUuidDocumentoRespaldo() {
 		return uuidDocumentoRespaldo;

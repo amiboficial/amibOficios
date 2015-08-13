@@ -23,7 +23,6 @@ public class OficioCnbvRestfulController {
 	@Autowired
 	private OficioCnbvService oficioCnbvService;
 	
-
 	@RequestMapping(value="/create", method = RequestMethod.GET)
 	public ResponseEntity<OficioCnbvTO> create(){
 		return new ResponseEntity<OficioCnbvTO>(new OficioCnbvTO(), HttpStatus.OK);

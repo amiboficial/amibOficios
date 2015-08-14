@@ -175,11 +175,11 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		if(offset == null || offset <= 0){
 			offset = 0;
 		}
-		if(sort == null || sort.trim().compareTo("") == 0 ){
-			sort = "id";
+		if(sort == null || sort.trim().compareTo("") == 0 || sort.compareToIgnoreCase("id") == 0 ){
+			sort = "o.id";
 		}
 		else if(!Arrays.asList( new String[]{"id","claveDga","fechaOficio"} ).contains(sort)){
-			sort = "id";
+			sort = "o.id";
 		}
 		if(order == null || order.trim().compareTo("") == 0){
 			order = "asc";
@@ -211,11 +211,11 @@ public class OficioCnbvJPADAO implements OficioCnbvDAO {
 		if(offset == null || offset <= 0){
 			offset = 0;
 		}
-		if(sort == null || sort.trim().compareTo("") == 0 ){
-			sort = "id";
+		if(sort == null || sort.trim().compareTo("") == 0  || sort.compareToIgnoreCase("id") == 0  ){
+			sort = "o.id";
 		}
 		else if(!Arrays.asList( new String[]{"id","claveDga","fechaOficio"} ).contains(sort)){
-			sort = "id";
+			sort = "o.id";
 		}
 		if(order == null || order.trim().compareTo("") == 0){
 			order = "asc";

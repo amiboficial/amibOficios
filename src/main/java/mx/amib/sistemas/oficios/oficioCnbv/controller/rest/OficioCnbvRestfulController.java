@@ -1,5 +1,6 @@
 package mx.amib.sistemas.oficios.oficioCnbv.controller.rest;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import mx.amib.sistemas.external.oficios.oficioCnbv.OficioCnbvTO;
@@ -62,6 +63,60 @@ public class OficioCnbvRestfulController {
 		return new ResponseEntity<SearchResult<OficioCnbvTO>>( 
 			this.oficioCnbvService.findAllByMultipleIdCertificacionInAutorizados(max, offset, sort, order, multipleIds), HttpStatus.OK 
 		);
+	}
+	
+	@RequestMapping(value="/findAllByNumeroOficio", method = RequestMethod.GET)
+	public ResponseEntity<SearchResult<OficioCnbvTO>> findAllByNumeroOficio(@RequestParam(value="numeroOficio", required=true) Integer numeroOficio){
+		return new ResponseEntity<SearchResult<OficioCnbvTO>>( 
+				this.oficioCnbvService.findAllByNumeroOficio(numeroOficio), HttpStatus.OK 
+		);
+	}
+	
+	@RequestMapping(value="/findAllByClaveDga", method = RequestMethod.GET)
+	public ResponseEntity<SearchResult<OficioCnbvTO>> findAllByClaveDga(@RequestParam(value="claveDga", required=true) String claveDga){
+		return new ResponseEntity<SearchResult<OficioCnbvTO>>( 
+				this.oficioCnbvService.findAllByClaveDga(claveDga), HttpStatus.OK 
+		);
+	}
+	
+	@RequestMapping(value="/findAllByFechaOficio", method = RequestMethod.GET)
+	public ResponseEntity<SearchResult<OficioCnbvTO>> findAllByFechaOficio(@RequestParam(value="max", defaultValue="10") Integer max, @RequestParam(value="offset", defaultValue="0") Integer offset, @RequestParam(value="sort", defaultValue="id") String sort, @RequestParam(value="order", defaultValue="asc") String order, 
+																			@RequestParam(value="fechaOficioDel", required=true) Long fechaOficioDel, @RequestParam(value="fechaOficioAl", required=true) Long fechaOficioAl){
+		/* pasa las fechas de long a time */
+		Calendar calFcDel = Calendar.getInstance();
+		Calendar calFcAl = Calendar.getInstance();
+		//sería bueno "limpiar" el tiempo de horas minutos y segundos
+		calFcDel.setTimeInMillis(fechaOficioDel);
+		calFcAl.setTimeInMillis(fechaOficioAl);
+		
+		//Hacer aqui la "conversion" de las fechas
+		return new ResponseEntity<SearchResult<OficioCnbvTO>>( 
+				this.oficioCnbvService.findAllByFechaOficio(max, offset, sort, order, calFcDel.getTime(), calFcAl.getTime()), HttpStatus.OK 
+		);
+	}
+	
+	public ResponseEntity<Boolean> checkUniqueClaveDga(@RequestParam(value="claveDga", required=true) String claveDga){
+		boolean resBoolean;
+		resBoolean = this.oficioCnbvService.checkUniqueClaveDga(claveDga);
+	
+		if(resBoolean){
+			return new ResponseEntity<Boolean>( true , HttpStatus.OK );
+		}
+		else{
+			return new ResponseEntity<Boolean>( false , HttpStatus.EXPECTATION_FAILED );
+		}
+	}
+	
+	public ResponseEntity<Boolean> checkUniqueNumeroOficio(@RequestParam(value="numeroOficio", required=true) Integer numeroOficio){
+		boolean resBoolean;
+		resBoolean = this.oficioCnbvService.checkUniqueNumeroOficio(numeroOficio);
+		
+		if(resBoolean){
+			return new ResponseEntity<Boolean>( true , HttpStatus.OK );
+		}
+		else{
+			return new ResponseEntity<Boolean>( false , HttpStatus.EXPECTATION_FAILED );
+		}
 	}
 	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)

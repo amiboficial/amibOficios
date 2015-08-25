@@ -2,6 +2,7 @@ package mx.amib.sistemas.oficios.oficioCnbv.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,33 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 		return sr;
 	}
 
+	public SearchResult<OficioCnbvTO> findAllByNumeroOficio(Integer numeroOficio) {
+		SearchResult<OficioCnbv> _sr = this.oficioCnbvDAO.findAllByNumeroOficio(numeroOficio);
+		SearchResult<OficioCnbvTO> sr = this.entityToTransport(_sr);
+		return sr;
+	}
+
+	public SearchResult<OficioCnbvTO> findAllByClaveDga(String claveDga) {
+		SearchResult<OficioCnbv> _sr = this.oficioCnbvDAO.findAllByClaveDga(claveDga);
+		SearchResult<OficioCnbvTO> sr = this.entityToTransport(_sr);
+		return sr;
+	}
+
+	public SearchResult<OficioCnbvTO> findAllByFechaOficio(Integer max, Integer offset, String sort, String order,
+			Date fechaOficioDel, Date fechaOficioAl) {
+		SearchResult<OficioCnbv> _sr = this.oficioCnbvDAO.findAllByFechaOficio(max,offset,sort,order,fechaOficioDel,fechaOficioAl);
+		SearchResult<OficioCnbvTO> sr = this.entityToTransport(_sr);
+		return sr;
+	}
+	
+	public boolean checkUniqueClaveDga(String claveDga) {
+		return this.oficioCnbvDAO.checkUniqueClaveDga(claveDga);
+	}
+
+	public boolean checkUniqueNumeroOficio(int numeroOficio) {
+		return this.oficioCnbvDAO.checkUniqueNumeroOficio(numeroOficio);
+	}
+	
 	public OficioCnbvTO get(Long id) {
 		return this.entityToTransport( this.oficioCnbvDAO.get(id) );
 	}
@@ -235,7 +263,6 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 		return o;
 	}
 
-	
 	//Getters y setters de injectado
 	public OficioCnbvDAO getOficioCnbvDAO() {
 		return oficioCnbvDAO;
@@ -244,4 +271,7 @@ public class OficioCnbvServiceImpl implements OficioCnbvService {
 	public void setOficioCnbvDAO(OficioCnbvDAO oficioCnbvDAO) {
 		this.oficioCnbvDAO = oficioCnbvDAO;
 	}
+
+	
+
 }

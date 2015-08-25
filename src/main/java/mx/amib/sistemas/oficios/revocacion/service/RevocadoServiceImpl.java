@@ -1,7 +1,11 @@
 package mx.amib.sistemas.oficios.revocacion.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -30,6 +34,27 @@ public class RevocadoServiceImpl implements RevocadoService {
 		return idsCertificacionFromIdsRevocados;
 	}
 
+	public Map<Long, Boolean> containsRevocados(Set<Long> idsApoderados) {
+		Map<Long, Boolean> apoderadosRevocados = new HashMap<Long, Boolean>();
+		List<Revocado> revocadosFound = this.revocadoDAO.findAllByIdApoderadoIn(idsApoderados);
+		Iterator<Revocado> iteratorRevocadosFound = null;
+		Revocado revocadoInstance = null;
+		
+		for(Long idApoderado : idsApoderados){
+			apoderadosRevocados.put(idApoderado, false);
+			
+			iteratorRevocadosFound = revocadosFound.iterator();
+			while(iteratorRevocadosFound.hasNext()){
+				revocadoInstance = iteratorRevocadosFound.next();
+				if(revocadoInstance.getApoderado().getId().longValue() == idApoderado.longValue()){
+					apoderadosRevocados.put(idApoderado, true);
+					break;
+				}
+			}
+		}
+		
+		return apoderadosRevocados;
+	}
 	
 	public RevocadoDAO getRevocadoDAO() {
 		return revocadoDAO;
@@ -38,4 +63,5 @@ public class RevocadoServiceImpl implements RevocadoService {
 	public void setRevocadoDAO(RevocadoDAO revocadoDAO) {
 		this.revocadoDAO = revocadoDAO;
 	}
+
 }

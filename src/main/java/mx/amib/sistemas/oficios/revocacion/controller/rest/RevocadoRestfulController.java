@@ -1,6 +1,8 @@
 package mx.amib.sistemas.oficios.revocacion.controller.rest;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import mx.amib.sistemas.external.oficios.revocacion.RevocadoTO;
 import mx.amib.sistemas.oficios.revocacion.service.RevocadoService;
@@ -31,6 +33,11 @@ public class RevocadoRestfulController {
 		return new ResponseEntity<List<Long>>(idsCert, HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/containsRevocados", method = RequestMethod.POST)
+	public ResponseEntity<Map<Long,Boolean>> containsRevocados(@RequestBody Set<Long> idsApoderados){
+		Map<Long,Boolean> apoderadoRevocado = this.revocadoService.containsRevocados(idsApoderados);
+		return new ResponseEntity<Map<Long,Boolean>>(apoderadoRevocado, HttpStatus.OK);
+	}
 	
 	//Getters y setters
 	public RevocadoService getRevocadoService() {

@@ -15,6 +15,7 @@ import mx.amib.sistemas.external.oficios.poder.ApoderadoTO;
 import mx.amib.sistemas.external.oficios.poder.PoderTO;
 import mx.amib.sistemas.oficios.poder.model.Apoderado;
 import mx.amib.sistemas.oficios.poder.model.Poder;
+import mx.amib.sistemas.oficios.poder.utils.TransportEntityConverter;
 import mx.amib.sistemas.oficios.poder.dao.PoderDAO;
 import mx.amib.sistemas.utils.SearchResult;
 
@@ -27,18 +28,17 @@ public class PoderServiceImpl implements PoderService {
 	
 	public PoderServiceImpl(){
 		super();
-		//ConvertUtils.register(null, null); <- Registrar aqui el convertidor convert,convertTO
 	}
 		
 	public SearchResult<PoderTO> index(Integer max, Integer offset, String sort, String order) {
 		SearchResult<Poder> rsp = poderDAO.findAll(max, offset, sort, order);
-		SearchResult<PoderTO> rspt = this.entityToTransport(rsp);
+		SearchResult<PoderTO> rspt = TransportEntityConverter.entityToTransport(rsp);
 		
 		return rspt;
 	}
 	
 	public PoderTO get(Long id){
-		return this.entityToTransport(poderDAO.get(id));
+		return TransportEntityConverter.entityToTransport(poderDAO.get(id));
 	}
 	
 	public SearchResult<PoderTO> findAllBy(Integer max, Integer offset, String sort, String order, 
@@ -49,7 +49,7 @@ public class PoderServiceImpl implements PoderService {
 		SearchResult<Poder> rsp = poderDAO.findAllBy(max, offset, sort, order, 
 				numeroEscritura, fechaDelDia, fechaDelMes, fechaDelAnio, 
 				fechaAlDia, fechaAlMes, fechaAlAnio, idGrupoFinanciero, idInstitucion);
-		SearchResult<PoderTO> rspt = this.entityToTransport(rsp);
+		SearchResult<PoderTO> rspt = TransportEntityConverter.entityToTransport(rsp);
 		
 		return rspt;
 	}
@@ -58,7 +58,7 @@ public class PoderServiceImpl implements PoderService {
 		Poder _p = new Poder();
 		PoderTO pres = new PoderTO();
 		
-		_p = this.setEntityWithTransportNoChilds(p, _p);
+		_p = TransportEntityConverter.setEntityWithTransportNoChilds(p, _p);
 		_p.setVersion(1L);
 		_p.setFechaCreacion(Calendar.getInstance().getTime());
 		_p.setFechaModificacion(Calendar.getInstance().getTime());
@@ -77,7 +77,7 @@ public class PoderServiceImpl implements PoderService {
 		
 		try{
 			_p = this.poderDAO.save(_p);
-			pres = this.entityToTransport(_p);
+			pres = TransportEntityConverter.entityToTransport(_p);
 		}
 		catch (Exception e) {
 			pres.setId(-1L);
@@ -100,7 +100,7 @@ public class PoderServiceImpl implements PoderService {
 		Poder _p = this.poderDAO.get(p.getId());
 		
 		//Actualiza datos de poder
-		_p = this.setEntityWithTransportNoChilds(p, _p);
+		_p = TransportEntityConverter.setEntityWithTransportNoChilds(p, _p);
 		_p.setVersion(_p.getVersion() + 1L);
 		_p.setFechaModificacion(Calendar.getInstance().getTime());
 		
@@ -152,7 +152,7 @@ public class PoderServiceImpl implements PoderService {
 		
 		try{
 			_p = this.poderDAO.update(_p);
-			pres = this.entityToTransport(_p);
+			pres = TransportEntityConverter.entityToTransport(_p);
 		}
 		catch (Exception e) {
 			pres.setId(-1L);
@@ -174,67 +174,6 @@ public class PoderServiceImpl implements PoderService {
 	}
 	public Boolean isNumeroEscrituraAvailable(Integer numeroEscritura) {
 		return this.poderDAO.isNumeroEscrituraAvailable(numeroEscritura);
-	}
-	
-	private Poder setEntityWithTransportNoChilds(PoderTO p, Poder _p){
-		_p.setIdGrupoFinanciero(p.getIdGrupoFinanciero());
-		_p.setIdInstitucion(p.getIdInstitucion());
-		_p.setIdNotario(p.getIdNotario());
-		_p.setNumeroEscritura(p.getNumeroEscritura());
-		_p.setRepresentanteLegalNombre(p.getRepresentanteLegalNombre());
-		_p.setRepresentanteLegalApellido1(p.getRepresentanteLegalApellido1());
-		_p.setRepresentanteLegalApellido2(p.getRepresentanteLegalApellido2());
-		_p.setFechaApoderamiento(p.getFechaApoderamiento());
-		_p.setUuidDocumentoRespaldo(p.getUuidDocumentoRespaldo());
-		return _p;
-	}
-	
-	private SearchResult<PoderTO> entityToTransport(SearchResult<Poder> _sr){
-		SearchResult<PoderTO> sr = new SearchResult<PoderTO>();
-		sr.setList(new ArrayList<PoderTO>());
-		sr.setError(false);
-		sr.setCount(0L);
-		for(Poder _p : _sr.getList()){
-			PoderTO p = this.entityToTransport(_p);
-			sr.getList().add(p);
-		}
-		sr.setError(_sr.getError());
-		sr.setCount(_sr.getCount());
-		return sr;
-	}
-	
-	private PoderTO entityToTransport(Poder _p){
-		PoderTO p = new PoderTO();
-		
-		//TODO: implementar el beanUtil copy
-		p.setId(_p.getId());
-		p.setVersion(_p.getVersion());
-		
-		p.setIdGrupoFinanciero(_p.getIdGrupoFinanciero());
-		p.setIdInstitucion(_p.getIdInstitucion());
-		p.setIdNotario(_p.getIdNotario());
-		p.setNumeroEscritura(_p.getNumeroEscritura());
-		p.setRepresentanteLegalNombre(_p.getRepresentanteLegalNombre());
-		p.setRepresentanteLegalApellido1(_p.getRepresentanteLegalApellido1());
-		p.setRepresentanteLegalApellido2(_p.getRepresentanteLegalApellido2());
-		p.setFechaApoderamiento(_p.getFechaApoderamiento());
-		p.setUuidDocumentoRespaldo(_p.getUuidDocumentoRespaldo());
-		
-		List<ApoderadoTO> apoderados = new ArrayList<ApoderadoTO>();
-		for(Apoderado _a : _p.getApoderados()){
-			ApoderadoTO a = new ApoderadoTO();
-			a.setId(_a.getId());
-			a.setIdCertificacion(_a.getIdCertificacion());
-			a.setIdPoder(_a.getPoder().getId());
-			a.setFechaCreacion(_a.getFechaCreacion());
-			a.setFechaModificacion(_a.getFechaModificacion());
-			apoderados.add(a);
-		}
-		p.setApoderados(apoderados);
-		
-		p.setFechaCreacion(_p.getFechaCreacion());
-		p.setFechaModificacion(_p.getFechaModificacion());
-		return p;
 	}
 
 	

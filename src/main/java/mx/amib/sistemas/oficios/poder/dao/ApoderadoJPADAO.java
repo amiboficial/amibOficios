@@ -1,5 +1,8 @@
 package mx.amib.sistemas.oficios.poder.dao;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -41,6 +44,11 @@ public class ApoderadoJPADAO implements ApoderadoDAO {
 		em.merge(ap);
 		em.flush();
 		return ap;
+	}
+
+	public List<Apoderado> findAllByIdCertificacionIn(
+			Collection<Long> idsCertificacion) {
+		return this.em.createQuery("SELECT ap FROM Apoderado ap where ap.idCertificacion IN (:ids)",Apoderado.class).setParameter("ids", idsCertificacion).getResultList();
 	}
 
 }

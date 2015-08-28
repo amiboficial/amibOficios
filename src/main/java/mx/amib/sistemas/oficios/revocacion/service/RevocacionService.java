@@ -13,4 +13,5 @@ public interface RevocacionService {
 	public RevocacionTO save(RevocacionTO r);
 	public RevocacionTO update(RevocacionTO r);
 	public Boolean delete(Long id);
+	public Boolean isNumeroEscrituraAvailable(int numeroEscritura);
 }

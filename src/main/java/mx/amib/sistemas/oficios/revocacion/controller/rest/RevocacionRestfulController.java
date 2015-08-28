@@ -71,6 +71,17 @@ public class RevocacionRestfulController {
 		}
 	}
 	
+	@RequestMapping(value="/isNumeroEscrituraAvailable/{numeroEscritura}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> isNumeroEscrituraAvailable(@PathVariable("numeroEscritura") Integer numeroEscritura){
+		Boolean b = this.revocacionService.isNumeroEscrituraAvailable(numeroEscritura);
+		if(b == true){
+			return new ResponseEntity<Boolean>( true , HttpStatus.OK );
+		}
+		else{
+			return new ResponseEntity<Boolean>( false , HttpStatus.EXPECTATION_FAILED );
+		}
+	}
+	
 	public RevocacionService getRevocacionService() {
 		return revocacionService;
 	}

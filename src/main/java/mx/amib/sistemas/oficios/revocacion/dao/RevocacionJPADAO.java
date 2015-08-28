@@ -200,4 +200,15 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		this.em.flush();
 	}
 
+	@Transactional(readOnly = true)
+	public boolean isNumeroEscrituraAvailable(Integer numeroEscritura) {
+		String jpql = "select count(rv.id) from Revocacion as rv where rv.numeroEscritura = :numeroEscritura";
+		Long count = em.createQuery(jpql, Long.class).setParameter("numeroEscritura", numeroEscritura).getSingleResult();
+		
+		if(count > 0)
+			return false;
+		else
+			return true;
+	}
+
 }

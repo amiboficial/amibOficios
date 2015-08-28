@@ -1,13 +1,10 @@
 package mx.amib.sistemas.oficios.poder.controller.rest;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import mx.amib.sistemas.external.oficios.poder.ApoderadoResultTO;
 import mx.amib.sistemas.external.oficios.poder.ApoderadoTO;
 import mx.amib.sistemas.oficios.poder.service.ApoderadoService;
-import mx.amib.sistemas.oficios.poder.service.PoderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

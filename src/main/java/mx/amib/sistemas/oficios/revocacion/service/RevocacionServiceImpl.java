@@ -235,6 +235,10 @@ public class RevocacionServiceImpl implements RevocacionService {
 		return completed;
 	}
 	
+	public Boolean isNumeroEscrituraAvailable(int numeroEscritura) {
+		return this.revocacionDAO.isNumeroEscrituraAvailable(numeroEscritura);
+	}
+	
 	public ApoderadoDAO getApoderadoDAO() {
 		return apoderadoDAO;
 	}
@@ -247,7 +251,4 @@ public class RevocacionServiceImpl implements RevocacionService {
 	public void setRevocacionDAO(RevocacionDAO revocacionDAO) {
 		this.revocacionDAO = revocacionDAO;
 	}
-
-	
-	
 }

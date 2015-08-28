@@ -13,4 +13,6 @@ public interface RevocacionDAO {
 	public Revocacion save(Revocacion r);
 	public Revocacion update(Revocacion r);
 	public void delete(Long id);
+	
+	public boolean isNumeroEscrituraAvailable(Integer numeroEscritura);
 }

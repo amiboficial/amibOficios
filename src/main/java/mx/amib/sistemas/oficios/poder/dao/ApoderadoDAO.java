@@ -11,5 +11,6 @@ public interface ApoderadoDAO {
 	public Apoderado save(Apoderado a);
 	public Apoderado update(Apoderado a);
 	
+	public List<Apoderado> getAll(Collection<Long> ids);
 	public List<Apoderado> findAllByIdCertificacionIn(Collection<Long> idsCertificacion);
 }

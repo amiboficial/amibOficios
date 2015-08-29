@@ -39,6 +39,19 @@ public class ApoderadoServiceImpl implements ApoderadoService {
 		
 		return ares;
 	}
+	public ApoderadoResultTO getAll(Collection<Long> ids) {
+		ApoderadoResultTO ares = new ApoderadoResultTO();
+		List<Apoderado> _apoderados = this.apoderadoDAO.getAll(ids);
+		List<Poder> _poderesDeApoderados = this.collectPoderesFromApoderadosEntity(_apoderados);
+		
+		List<PoderTO> poderes = TransportEntityConverter.entityToTransport(_poderesDeApoderados);
+		List<ApoderadoTO> apoderados = this.collectApoderadosById(poderes,ids);
+		
+		ares.setApoderados(apoderados);
+		ares.setPoderes(poderes);
+		
+		return ares;
+	}
 	
 	private List<Poder> collectPoderesFromApoderadosEntity(List<Apoderado> _apoderados){
 		Set<Poder> _poderes = new HashSet<Poder>();
@@ -60,6 +73,19 @@ public class ApoderadoServiceImpl implements ApoderadoService {
 		}
 		return listApoderados;
 	}
+	private List<ApoderadoTO> collectApoderadosById(List<PoderTO> poderes, Collection<Long> ids){
+		List<ApoderadoTO> listApoderados = new ArrayList<ApoderadoTO>();
+		for(PoderTO p : poderes){
+			for(ApoderadoTO a : p.getApoderados()){
+				for(Long id : ids){
+					if(a.getId().longValue() == id.longValue()){
+						listApoderados.add(a);
+					}
+				}
+			}
+		}
+		return listApoderados;
+	}
 	
 	public ApoderadoDAO getApoderadoDAO() {
 		return apoderadoDAO;
@@ -68,5 +94,7 @@ public class ApoderadoServiceImpl implements ApoderadoService {
 	public void setApoderadoDAO(ApoderadoDAO apoderadoDAO) {
 		this.apoderadoDAO = apoderadoDAO;
 	}
+
+	
 
 }

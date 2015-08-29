@@ -51,4 +51,8 @@ public class ApoderadoJPADAO implements ApoderadoDAO {
 		return this.em.createQuery("SELECT ap FROM Apoderado ap where ap.idCertificacion IN (:ids)",Apoderado.class).setParameter("ids", idsCertificacion).getResultList();
 	}
 
+	public List<Apoderado> getAll(Collection<Long> ids) {
+		return this.em.createQuery("SELECT ap FROM Apoderado ap where ap.id IN (:ids)",Apoderado.class).setParameter("ids", ids).getResultList();
+	}
+
 }

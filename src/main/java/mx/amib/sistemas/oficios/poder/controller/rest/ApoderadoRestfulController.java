@@ -26,6 +26,12 @@ public class ApoderadoRestfulController {
 		return (new ApoderadoTO());
 	}
 	
+	@RequestMapping(value="/getAll", method = RequestMethod.POST)
+	public ResponseEntity<ApoderadoResultTO> getAll(@RequestBody Set<Long> ids){
+		ApoderadoResultTO ares = apoderadoService.getAll(ids);
+		return new ResponseEntity<ApoderadoResultTO>( ares , HttpStatus.OK );
+	}
+	
 	@RequestMapping(value="/findAllByIdCertificacionIn", method = RequestMethod.POST)
 	public ResponseEntity<ApoderadoResultTO> findAllByIdCertificacionIn(@RequestBody Set<Long> multipleIdsCertificacion){
 		ApoderadoResultTO ares = apoderadoService.findAllByIdCertificacionIn(multipleIdsCertificacion);

@@ -95,6 +95,7 @@ public class OficioCnbvRestfulController {
 		);
 	}
 	
+	@RequestMapping(value="/checkUniqueClaveDga", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> checkUniqueClaveDga(@RequestParam(value="claveDga", required=true) String claveDga){
 		boolean resBoolean;
 		resBoolean = this.oficioCnbvService.checkUniqueClaveDga(claveDga);
@@ -107,6 +108,7 @@ public class OficioCnbvRestfulController {
 		}
 	}
 	
+	@RequestMapping(value="/checkUniqueNumeroOficio", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> checkUniqueNumeroOficio(@RequestParam(value="numeroOficio", required=true) Integer numeroOficio){
 		boolean resBoolean;
 		resBoolean = this.oficioCnbvService.checkUniqueNumeroOficio(numeroOficio);

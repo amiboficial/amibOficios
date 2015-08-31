@@ -48,6 +48,50 @@ public class RevocacionServiceImpl implements RevocacionService {
 		return rsrt;
 	}
 
+	public SearchResult<RevocacionTO> findAllByNumeroEscritura(Integer numeroEscritura) {
+		SearchResult<Revocacion> _result;
+		SearchResult<RevocacionTO> result; 
+		
+		_result = this.revocacionDAO.findAllByNumeroEscritura(numeroEscritura);
+		result = this.entityToTransport(_result); 
+		
+		return result;
+	}
+
+	public SearchResult<RevocacionTO> findAllByFechaRevocacion(Integer max, Integer offset, String sort, String order,
+			Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio, Integer fechaAlDia, Integer fechaAlMes,
+			Integer fechaAlAnio) {
+		SearchResult<Revocacion> _result;
+		SearchResult<RevocacionTO> result; 
+		
+		_result = this.revocacionDAO.findAllByFechaRevocacion(max,offset,sort,order,fechaDelDia, fechaDelMes, fechaDelAnio, fechaAlDia, fechaAlMes, fechaAlAnio);
+		result = this.entityToTransport(_result); 
+		
+		return result;
+	}
+
+	public SearchResult<RevocacionTO> findAllByGrupoFinanciero(Integer max, Integer offset, String sort, String order,
+			Long idGrupoFinanciero) {
+		SearchResult<Revocacion> _result;
+		SearchResult<RevocacionTO> result; 
+		
+		_result = this.revocacionDAO.findAllByGrupoFinanciero(max,offset,sort,order,idGrupoFinanciero);
+		result = this.entityToTransport(_result); 
+		
+		return result;
+	}
+
+	public SearchResult<RevocacionTO> findAllByInstitucion(Integer max, Integer offset, String sort, String order,
+			Long idInstitucion) {
+		SearchResult<Revocacion> _result;
+		SearchResult<RevocacionTO> result; 
+		
+		_result = this.revocacionDAO.findAllByInstitucion(max,offset,sort,order,idInstitucion);
+		result = this.entityToTransport(_result); 
+		
+		return result;
+	}
+	
 	public RevocacionTO get(Long id) {
 		return this.entityToTransport( this.revocacionDAO.get(id) );
 	}
@@ -251,4 +295,6 @@ public class RevocacionServiceImpl implements RevocacionService {
 	public void setRevocacionDAO(RevocacionDAO revocacionDAO) {
 		this.revocacionDAO = revocacionDAO;
 	}
+
+	
 }

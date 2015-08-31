@@ -9,6 +9,15 @@ public interface RevocacionService {
 			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
 			Long idGrupoFinanciero, Long idInstitucion);
+	
+	public SearchResult<RevocacionTO> findAllByNumeroEscritura(Integer numeroEscritura);
+	public SearchResult<RevocacionTO> findAllByFechaRevocacion(Integer max, Integer offset, String sort, String order,
+			Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio, Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio);
+	public SearchResult<RevocacionTO> findAllByGrupoFinanciero(Integer max, Integer offset, String sort, String order,
+			Long idGrupoFinanciero);
+	public SearchResult<RevocacionTO> findAllByInstitucion(Integer max, Integer offset, String sort, String order,
+			Long idInstitucion);
+	
 	public RevocacionTO get(Long id);
 	public RevocacionTO save(RevocacionTO r);
 	public RevocacionTO update(RevocacionTO r);

@@ -9,6 +9,15 @@ public interface RevocacionDAO {
 			Integer numeroEscritura, Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio,  
 			Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio, 
 			Long idGrupoFinanciero, Long idInstitucion);
+	
+	public SearchResult<Revocacion> findAllByNumeroEscritura(Integer numeroEscritura);
+	public SearchResult<Revocacion> findAllByFechaRevocacion(Integer max, Integer offset, String sort, String order,
+			Integer fechaDelDia, Integer fechaDelMes, Integer fechaDelAnio, Integer fechaAlDia, Integer fechaAlMes, Integer fechaAlAnio);
+	public SearchResult<Revocacion> findAllByGrupoFinanciero(Integer max, Integer offset, String sort, String order,
+			Long idGrupoFinanciero);
+	public SearchResult<Revocacion> findAllByInstitucion(Integer max, Integer offset, String sort, String order,
+			Long idInstitucion);
+	
 	public Revocacion get(Long id);
 	public Revocacion save(Revocacion r);
 	public Revocacion update(Revocacion r);

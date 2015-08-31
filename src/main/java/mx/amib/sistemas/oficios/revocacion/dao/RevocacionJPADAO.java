@@ -179,7 +179,7 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		SearchResult<Revocacion> rs = new SearchResult<Revocacion>();
 		TypedQuery<Revocacion> tquery;
 		
-		tquery = em.createQuery(jpql, Revocacion.class);
+		tquery = em.createQuery(jpql, Revocacion.class).setParameter("numeroEscritura", numeroEscritura);
 		rs.setList(tquery.getResultList());
 		rs.setCount(Long.valueOf(rs.getList().size()));
 		rs.setError(false);
@@ -227,7 +227,7 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		}
 		if( (fechaAlDia != null && fechaAlMes != null && fechaAlAnio != null) &&
 			(fechaAlDia > 0 && fechaAlMes > 0 && fechaAlAnio > 0) ){
-			fechaAlCalendar.set(fechaAlDia,fechaAlMes-1,fechaAlAnio,00,00,00);
+			fechaAlCalendar.set(fechaAlAnio,fechaAlMes-1,fechaAlDia,00,00,00);
 		}
 		
 		//rangos de fecha

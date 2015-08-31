@@ -72,7 +72,7 @@ public class RevocacionRestfulController {
 		searchResult = this.revocacionService.findAllByFechaRevocacion(max,offset,sort,order,
 				fechaDelDia,fechaDelMes,fechaDelAnio,fechaAlDia,fechaAlMes,fechaAlAnio);
 		
-		return new ResponseEntity<SearchResult<RevocacionTO>>( searchResult , HttpStatus.OK);
+		return new ResponseEntity<SearchResult<RevocacionTO>>( searchResult , HttpStatus.OK );
 	}
 	
 	@RequestMapping(value="/findAllByGrupoFinanciero", method = RequestMethod.GET)

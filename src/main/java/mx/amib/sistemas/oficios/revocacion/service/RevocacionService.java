@@ -1,5 +1,7 @@
 package mx.amib.sistemas.oficios.revocacion.service;
 
+import java.util.Set;
+
 import mx.amib.sistemas.external.oficios.revocacion.RevocacionTO;
 import mx.amib.sistemas.utils.SearchResult;
 
@@ -17,6 +19,8 @@ public interface RevocacionService {
 			Long idGrupoFinanciero);
 	public SearchResult<RevocacionTO> findAllByInstitucion(Integer max, Integer offset, String sort, String order,
 			Long idInstitucion);
+	
+	public Set<RevocacionTO> getAllByIdCertficacionInSet(Set<Long> idsCertficacion);
 	
 	public RevocacionTO get(Long id);
 	public RevocacionTO save(RevocacionTO r);

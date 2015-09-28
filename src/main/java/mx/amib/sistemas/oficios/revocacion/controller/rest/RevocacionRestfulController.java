@@ -4,6 +4,9 @@ import mx.amib.sistemas.external.oficios.revocacion.RevocacionTO;
 import mx.amib.sistemas.oficios.revocacion.service.RevocacionService;
 import mx.amib.sistemas.utils.SearchResult;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -107,6 +110,11 @@ public class RevocacionRestfulController {
 		return new ResponseEntity<SearchResult<RevocacionTO>>( searchResult , HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/getAllByIdCertficacionInSet", method = RequestMethod.POST)
+	public ResponseEntity<Set<RevocacionTO>> getAllByIdCertficacionInSet(@RequestBody Set<Long> idsCertficacion){
+		return new ResponseEntity<Set<RevocacionTO>>( this.revocacionService.getAllByIdCertficacionInSet(idsCertficacion) , HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RevocacionTO> show(@PathVariable("id") Long id){
 		return new ResponseEntity<RevocacionTO>( this.revocacionService.get(id) , HttpStatus.OK);
@@ -152,5 +160,7 @@ public class RevocacionRestfulController {
 	public void setRevocacionService(RevocacionService revocacionService) {
 		this.revocacionService = revocacionService;
 	}
+	
+	
 	
 }

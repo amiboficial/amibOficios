@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -410,6 +412,12 @@ public class RevocacionJPADAO implements RevocacionDAO {
 		rs.setError(false);
 		
 		return rs;
+	}
+	
+	public Set<Revocacion> getAllByIdCertficacionInSet(Set<Long> idsCertficacion){
+		String jpql = "SELECT r FROM Revocacion r INNER JOIN r.revocados rvs WHERE rvs.apoderado.idCertificacion IN (:idsCertficacion)";
+		Set<Revocacion> result = new HashSet<Revocacion>(this.em.createQuery(jpql,Revocacion.class).setParameter("idsCertficacion", idsCertficacion).getResultList());
+		return result;
 	}
 	
 	@Transactional(readOnly = true)

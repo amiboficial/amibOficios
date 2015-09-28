@@ -3,8 +3,10 @@ package mx.amib.sistemas.oficios.revocacion.service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -87,6 +89,16 @@ public class RevocacionServiceImpl implements RevocacionService {
 		SearchResult<RevocacionTO> result; 
 		
 		_result = this.revocacionDAO.findAllByInstitucion(max,offset,sort,order,idInstitucion);
+		result = this.entityToTransport(_result); 
+		
+		return result;
+	}
+	
+	public Set<RevocacionTO> getAllByIdCertficacionInSet(Set<Long> idsCertficacion){
+		Set<Revocacion> _result;
+		Set<RevocacionTO> result;
+		
+		_result = this.revocacionDAO.getAllByIdCertficacionInSet(idsCertficacion);
 		result = this.entityToTransport(_result); 
 		
 		return result;
@@ -232,7 +244,14 @@ public class RevocacionServiceImpl implements RevocacionService {
 		sr.setCount(_sr.getCount());
 		return sr;
 	}
-	
+	private Set<RevocacionTO> entityToTransport(Set<Revocacion> _sr){
+		Set<RevocacionTO> sr = new HashSet<RevocacionTO>();
+		for(Revocacion _r : _sr){
+			RevocacionTO r = this.entityToTransport(_r);
+			sr.add(r);
+		}
+		return sr;
+	}
 	private RevocacionTO entityToTransport(Revocacion _r){
 		RevocacionTO r = new RevocacionTO();
 		

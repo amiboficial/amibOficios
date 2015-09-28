@@ -1,5 +1,7 @@
 package mx.amib.sistemas.oficios.revocacion.dao;
 
+import java.util.Set;
+
 import mx.amib.sistemas.oficios.revocacion.model.Revocacion;
 import mx.amib.sistemas.utils.SearchResult;
 
@@ -17,6 +19,8 @@ public interface RevocacionDAO {
 			Long idGrupoFinanciero);
 	public SearchResult<Revocacion> findAllByInstitucion(Integer max, Integer offset, String sort, String order,
 			Long idInstitucion);
+	
+	public Set<Revocacion> getAllByIdCertficacionInSet(Set<Long> idsCertficacion);
 	
 	public Revocacion get(Long id);
 	public Revocacion save(Revocacion r);

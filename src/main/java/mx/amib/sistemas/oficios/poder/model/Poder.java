@@ -44,6 +44,9 @@ public class Poder implements Serializable {
 	@Column(name="fh_modificacion")
 	private Date fechaModificacion;
 	
+	@Column(name="tx_ultusuariomod")
+	private String usuarioMod;
+	
 	public Long getId() {
 		return id;
 	}
@@ -128,6 +131,13 @@ public class Poder implements Serializable {
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
-	
+	public String getUsuarioMod() {
+		return usuarioMod;
+	}
+	public void setUsuarioMod(String usuarioMod) {
+		this.usuarioMod = usuarioMod;
+	}
+
+
 	private static final long serialVersionUID = 1L;
 }

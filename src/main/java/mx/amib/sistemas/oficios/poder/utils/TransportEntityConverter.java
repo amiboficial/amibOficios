@@ -21,6 +21,7 @@ public final class TransportEntityConverter {
 		_p.setRepresentanteLegalApellido2(p.getRepresentanteLegalApellido2());
 		_p.setFechaApoderamiento(p.getFechaApoderamiento());
 		_p.setUuidDocumentoRespaldo(p.getUuidDocumentoRespaldo());
+		_p.setUsuarioMod(p.getUsuarioMod());
 		return _p;
 	}
 	

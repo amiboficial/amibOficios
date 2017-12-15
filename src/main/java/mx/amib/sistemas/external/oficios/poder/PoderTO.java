@@ -23,6 +23,8 @@ public class PoderTO {
 	//"yyyy-MM-dd'T'HH:mm:ssZ"
 	private Date fechaCreacion;
 	private Date fechaModificacion;
+
+	private String usuarioMod;
 	
 	public PoderTO(){}
 	
@@ -109,5 +111,11 @@ public class PoderTO {
 	}
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+	public String getUsuarioMod() {
+		return usuarioMod;
+	}
+	public void setUsuarioMod(String usuarioMod) {
+		this.usuarioMod = usuarioMod;
 	}
 }
